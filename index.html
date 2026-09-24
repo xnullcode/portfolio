@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adil Ali</title>
+    
+    <!-- Minimalistic Terminal SVG Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300FF66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS v4 Browser Build -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    
+    <!-- Tailwind Config for v4 -->
+    <style type="text/tailwindcss">
+        @theme {
+            --color-matte-black: #0A0E17;
+            --color-code-green: #00FF66;
+            --color-slate-muted: #334155;
+            --color-card-bg: rgba(255, 255, 255, 0.03);
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            @apply bg-matte-black text-gray-300 font-sans antialiased overflow-x-hidden selection:bg-code-green selection:text-matte-black;
+        }
+
+        .glass-card {
+            @apply bg-card-bg backdrop-blur-md border border-slate-muted/40 rounded-xl;
+        }
+        
+        .slide-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .slide-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typewriter cursor blink */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+    </style>
+    
+    <!-- Feather Icons for clean icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="min-h-screen flex flex-col items-center">
+    <!-- Navbar (Optional, or just floating links) -->
+    <nav class="w-full max-w-6xl mx-auto px-6 py-4 flex justify-end items-center z-50 relative">
+        <div class="flex gap-6 text-sm font-mono">
+            <a href="#projects" class="hover:text-code-green transition-colors">Projects</a>
+            <a href="#metrics" class="hover:text-code-green transition-colors">Metrics</a>
+            <a href="#contact" class="hover:text-code-green transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <main class="w-full max-w-6xl mx-auto px-6 flex-grow flex flex-col gap-32 pb-24">
+        
+        <!-- HERO SECTION -->
+        <section id="hero" class="pt-4 pb-8 md:pt-16 flex flex-col lg:flex-row items-center gap-16 slide-in">
+            <div class="flex-1 flex flex-col gap-6">
+                <div class="text-code-green font-mono tracking-tight text-sm md:text-base">Hello, I'm Adil Ali.</div>
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight text-white">
+                    Building High-Performance <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-code-green to-teal-400">Applications &amp; Cloud-Native Systems.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
+                    Specializing in clean architecture, isolated code execution, and distributed software solutions that scale efficiently.
+                </p>
+                <div class="mt-4 flex gap-4 font-mono text-sm">
+                    <a href="#projects" class="px-6 py-3 border border-code-green text-code-green rounded hover:bg-code-green/10 transition-colors">View Architecture</a>
+                    <a href="#contact" class="px-6 py-3 border border-slate-muted rounded hover:bg-slate-muted/20 transition-colors">Contact System</a>
+                </div>
+            </div>
+            
+            <!-- Code Terminal Widget -->
+            <div class="flex-1 w-full max-w-lg glass-card overflow-hidden shadow-2xl shadow-code-green/5">
+                <!-- Terminal Header -->
+                <div class="flex items-center gap-2 px-4 py-3 border-b border-slate-muted/40 bg-[#06090F]">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-2 text-xs font-mono text-gray-500">guest@dev-env: ~</span>
+                </div>
+                <!-- Terminal Body -->
+                <div class="p-6 font-mono text-sm leading-relaxed text-gray-300 min-h-[200px]" id="terminal-widget">
+                    <span class="text-code-green">&gt;</span> cat profile.json<br/>
+                    <span id="typewriter-content" class="whitespace-pre-wrap"></span><span class="inline-block w-2 h-4 bg-gray-400 cursor-blink ml-1 align-middle"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARCHITECTURAL SHOWCASE -->
+        <section id="projects" class="flex flex-col gap-8 slide-in">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <h2 class="text-3xl font-bold text-white">
+                        Architectural Showcase
+                    </h2>
+                    <p class="text-gray-400 mt-2 font-mono text-sm">System implementations and core engineering projects.</p>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-2 font-mono text-xs" id="project-filters">
+                    <button class="filter-btn active px-4 py-2 rounded border border-code-green bg-code-green/10 text-code-green transition-all" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-2 rounded border border-slate-muted hover:border-code-green/50 hover:text-code-green transition-all" data-filter="monolith">Monolith</button>
+                    <button class="filter-btn px-4 py-2 rounded border border-slate-muted hover:border-code-green/50 hover:text-code-green transition-all" data-filter="microservices">Microservices</button>
+                    <button class="filter-btn px-4 py-2 rounded border border-slate-muted hover:border-code-green/50 hover:text-code-green transition-all" data-filter="devtools">DevTools</button>
+                </div>
+            </div>
+
+            <!-- Project Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="project-grid">
+                
+                <!-- Project 1: OpenRun -->
+                <div class="glass-card flex flex-col project-card" data-category="devtools">
+                    <div class="p-5 border-b border-slate-muted/40 flex justify-between items-center bg-white/5 rounded-t-xl">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            OpenRun
+                            <a href="https://github.com/xnullcode/openrun" target="_blank" class="ml-1 text-gray-500 hover:text-code-green transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-code-green/20 text-code-green rounded">DevTools</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col gap-4">
+                        <p class="text-sm text-gray-400">Competitive Programming Platform & AI Editor.</p>
+                        
+                        <!-- Tabs Header -->
+                        <div class="flex gap-4 border-b border-slate-muted/40 font-mono text-xs pb-1 project-tabs">
+                            <button class="text-code-green border-b-2 border-code-green pb-1" data-target="p1-overview">Overview</button>
+                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p1-tech">Tech</button>
+                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p1-arch">Architecture</button>
+                        </div>
+                        
+                        <!-- Tabs Content -->
+                        <div class="text-xs text-gray-300 flex-grow relative overflow-hidden min-h-[150px]">
+                            <div id="p1-overview" class="absolute inset-0 tab-content active-tab opacity-100 transition-opacity">
+                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                    <li>Real-time competitive coding environment.</li>
+                                    <li>AI-assisted code generation and analysis.</li>
+                                    <li>Secure, sandboxed code execution pipeline.</li>
+                                </ul>
+                            </div>
+                            <div id="p1-tech" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">React 19</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Monaco Editor</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">FastAPI</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Docker</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Asyncio</span>
+                                </div>
+                            </div>
+                            <div id="p1-arch" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
+                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                    <li>Real-time SSE stream processing via Fetch API/ReadableStream.</li>
+                                    <li>Isolated process harness injection mapping compiler errors to line numbers.</li>
+                                    <li>Secure BYOK local storage architecture.</li>
+                                    <li>HTML sanitation via DOMPurify.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Nowait Monolith -->
+                <div class="glass-card flex flex-col project-card" data-category="monolith">
+                    <div class="p-5 border-b border-slate-muted/40 flex justify-between items-center bg-white/5 rounded-t-xl">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            Nowait (Monolith)
+                            <a href="https://github.com/xnullcode/nowait" target="_blank" class="ml-1 text-gray-500 hover:text-code-green transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-blue-500/20 text-blue-400 rounded">Monolith</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col gap-4">
+                        <p class="text-sm text-gray-400">Multi-Tenant SaaS Kiosk Application.</p>
+                        
+                        <div class="flex gap-4 border-b border-slate-muted/40 font-mono text-xs pb-1 project-tabs">
+                            <button class="text-code-green border-b-2 border-code-green pb-1" data-target="p2-overview">Overview</button>
+                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p2-tech">Tech</button>
+                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p2-arch">Architecture</button>
+                        </div>
+                        
+                        <div class="text-xs text-gray-300 flex-grow relative overflow-hidden min-h-[150px]">
+                            <div id="p2-overview" class="absolute inset-0 tab-content active-tab opacity-100 transition-opacity">
+                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                    <li>High-performance kiosk ordering system.</li>
+                                    <li>Multi-tenant architecture for restaurant chains.</li>
+                                    <li>Integrated secure payment processing.</li>
+                                </ul>
+                            </div>
+                            <div id="p2-tech" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">React 19</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Tailwind v4</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Spring Boot 3.4</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Spring Security</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">PostgreSQL</span>
+                                </div>
+                            </div>
+                            <div id="p2-arch" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
+                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                    <li>OncePerRequestFilter JWT auth chain.</li>
+                                    <li>Server-side HMAC-SHA256 Razorpay payment signature verification.</li>
+                                    <li>Lazy-initialized React state from localStorage to avoid render cycles.</li>
+                                    <li>Client + Server side dual-line stock enforcement blocks.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Nowait Microservices -->
+                <div class="glass-card flex flex-col project-card" data-category="microservices">
+                    <div class="p-5 border-b border-slate-muted/40 flex justify-between items-center bg-white/5 rounded-t-xl">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            Nowait (Cloud)
+                            <a href="https://github.com/xnullcode/nowait/tree/microservices-refactor" target="_blank" class="ml-1 text-gray-500 hover:text-code-green transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
+                        </h3>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-purple-500/20 text-purple-400 rounded">Microservices</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col gap-4">
+                        <p class="text-sm text-gray-400">Cloud-Native Microservices Branch.</p>
+                        
+                        <div class="flex gap-4 border-b border-slate-muted/40 font-mono text-xs pb-1 project-tabs">
+                            <button class="text-code-green border-b-2 border-code-green pb-1" data-target="p3-overview">Overview</button>
+                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p3-tech">Tech</button>
+                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p3-arch">Architecture</button>
+                        </div>
+                        
+                        <div class="text-xs text-gray-300 flex-grow relative overflow-hidden min-h-[150px]">
+                            <div id="p3-overview" class="absolute inset-0 tab-content active-tab opacity-100 transition-opacity">
+                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                    <li>Distributed evolution of the Nowait platform.</li>
+                                    <li>Independent scaling and deployment of domains.</li>
+                                    <li>Zero-trust security model.</li>
+                                </ul>
+                            </div>
+                            <div id="p3-tech" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Kubernetes</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Spring Cloud Gateway</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Nginx</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">PostgreSQL</span>
+                                </div>
+                            </div>
+                            <div id="p3-arch" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
+                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                    <li>API routing & CORS mitigation via Gateway/Nginx proxies.</li>
+                                    <li>Stateless asymmetric RSA-signed JWT validation.</li>
+                                    <li>Database-per-Service pattern.</li>
+                                    <li>Zero-Trust frontend routing using history.replaceState to mitigate Forced Browsing.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TECH STACK & SYSTEM METRICS -->
+        <section id="metrics" class="slide-in">
+            <h2 class="text-3xl font-bold text-white mb-8">
+                System Metrics & Capabilities
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Metric Card 1 -->
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="font-mono text-sm text-code-green">Authentication & Security</h4>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            Asymmetric RSA JWT
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            Spring Security Filters
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            HMAC Verification
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Metric Card 2 -->
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="font-mono text-sm text-code-green">Infrastructure & DevOps</h4>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            Kubernetes Orchestration
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            Docker Containers
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            Nginx Reverse Proxies
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Metric Card 3 -->
+                <div class="glass-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="font-mono text-sm text-code-green">Frontend Architecture</h4>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            React 19 Context API
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            State Debouncing
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                            Tailwind v4 Styling
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER / CONTACT LINK TREE -->
+    <footer id="contact" class="w-full border-t border-slate-muted/20 bg-[#06090F] pt-12 pb-6 slide-in">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <div class="flex flex-col gap-2 text-center md:text-left">
+                <h3 class="font-bold text-white text-xl">Contact Me</h3>
+                <p class="text-sm text-gray-400 font-mono">Open to new opportunities and technical discussions.</p>
+                <div class="flex gap-4 mt-4 justify-center md:justify-start">
+                    <a href="https://github.com/xnullcode" target="_blank" class="p-3 bg-white/5 rounded-full hover:bg-code-green/20 hover:text-code-green transition-all group">
+                        <i data-feather="github" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/xnullcode" target="_blank" class="p-3 bg-white/5 rounded-full hover:bg-code-green/20 hover:text-code-green transition-all group">
+                        <i data-feather="linkedin" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    <a href="mailto:adilalicm@gmail.com" class="p-3 bg-white/5 rounded-full hover:bg-code-green/20 hover:text-code-green transition-all group">
+                        <i data-feather="mail" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mini Terminal Simulator -->
+            <div class="w-full md:w-[400px] glass-card p-4 font-mono text-sm">
+                <div class="h-[100px] overflow-y-auto mb-2 text-gray-400" id="cmd-output">
+                    Type 'help' for contact info.
+                </div>
+                <div class="flex items-center gap-2 border-t border-slate-muted/40 pt-2">
+                    <span class="text-code-green">~$</span>
+                    <input type="text" id="cmd-input" class="bg-transparent border-none outline-none text-white w-full flex-grow" autocomplete="off" spellcheck="false">
+                </div>
+            </div>
+
+        </div>
+        <div class="text-center mt-12 text-xs font-mono text-gray-600">
+            &copy; 2026 Adil Ali.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
