@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Adil Ali</title>
     
-    <!-- Minimalistic Terminal SVG Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F59E0B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
+    <!-- Material You Terminal Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -516,45 +518,48 @@
             </div>
         </section>
  
-        <!-- INTERLUDE QUOTE 01 (Between Hero & Architectural Showcase) -->
-        <div class="w-full flex justify-center slide-in my-2">
-            <div class="quote-glass-card max-w-2xl w-full p-4 sm:p-7 relative overflow-hidden group">
-                <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
-                <div class="flex items-start gap-3 sm:gap-5">
-                    <span class="text-amber-400 font-serif text-3xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
-                    <div class="flex flex-col gap-2.5 min-w-0">
-                        <blockquote class="text-sm sm:text-base font-satoshi font-medium leading-relaxed theme-heading italic">
-                            Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
-                        </blockquote>
-                        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono theme-subtext">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
-                            <span class="text-amber-400 font-semibold">Martin Fowler</span>
-                            <span class="opacity-40">//</span>
-                            <span>Refactoring &amp; Software Craftsmanship</span>
+        <!-- PROJECTS SECTION (ARCHITECTURAL SHOWCASE) -->
+        <section id="projects" class="flex flex-col gap-10 sm:gap-14 slide-in">
+
+            <!-- INTERLUDE QUOTE 01 (Between Hero & Architectural Showcase) -->
+            <div class="w-full flex justify-center my-2">
+                <div class="quote-glass-card max-w-2xl w-full p-4 sm:p-7 relative overflow-hidden group">
+                    <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="flex items-start gap-3 sm:gap-5">
+                        <span class="text-amber-400 font-serif text-3xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
+                        <div class="flex flex-col gap-2.5 min-w-0">
+                            <blockquote class="text-sm sm:text-base font-satoshi font-medium leading-relaxed theme-heading italic">
+                                Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+                            </blockquote>
+                            <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono theme-subtext">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+                                <span class="text-amber-400 font-semibold">Martin Fowler</span>
+                                <span class="opacity-40">//</span>
+                                <span>Refactoring &amp; Software Craftsmanship</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- ARCHITECTURAL SHOWCASE -->
-        <section id="projects" class="flex flex-col gap-8 slide-in">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div>
-                    <h2 class="text-3xl font-bold theme-heading">
-                        Architectural Showcase
-                    </h2>
-                    <p class="theme-subtext mt-2 font-satoshi text-sm">System implementations and core engineering projects.</p>
+            <!-- Architectural Showcase Header & Grid -->
+            <div class="flex flex-col gap-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div>
+                        <h2 class="text-3xl font-bold theme-heading">
+                            Architectural Showcase
+                        </h2>
+                        <p class="theme-subtext mt-2 font-satoshi text-sm">System implementations and core engineering projects.</p>
+                    </div>
+                    
+                    <!-- Filter Buttons -->
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2 font-mono text-xs" id="project-filters">
+                        <button class="filter-btn active px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded border border-amber-500 bg-amber-500/10 text-amber-400 transition-all cursor-pointer" data-filter="all">All</button>
+                        <button class="filter-btn px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="monolith">Monolith</button>
+                        <button class="filter-btn px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="microservices">Microservices</button>
+                        <button class="filter-btn px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="devtools">DevTools</button>
+                    </div>
                 </div>
-                
-                <!-- Filter Buttons -->
-                <div class="flex flex-wrap gap-2 font-mono text-xs" id="project-filters">
-                    <button class="filter-btn active px-4 py-2 rounded border border-amber-500 bg-amber-500/10 text-amber-400 transition-all cursor-pointer" data-filter="all">All</button>
-                    <button class="filter-btn px-4 py-2 rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="monolith">Monolith</button>
-                    <button class="filter-btn px-4 py-2 rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="microservices">Microservices</button>
-                    <button class="filter-btn px-4 py-2 rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="devtools">DevTools</button>
-                </div>
-            </div>
 
             <!-- Project Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="project-grid">
@@ -702,7 +707,8 @@
                 </div>
 
             </div>
-        </section>
+        </div>
+    </section>
  
         <!-- TECH STACK & SYSTEM CAPABILITIES (METRICS) -->
         <section id="metrics" class="flex flex-col gap-14 slide-in">
