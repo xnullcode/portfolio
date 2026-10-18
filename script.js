@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { text: '\n  ],\n  ', cls: 'text-gray-400' },
         { text: '"status"', cls: 'text-sky-300' },
         { text: ': ', cls: 'text-gray-400' },
-        { text: '"open_for_opportunities"', cls: 'text-emerald-300' },
+        { text: '"open_for_opportunities"', cls: 'text-amber-400' },
         { text: '\n}', cls: 'text-gray-400' }
     ];
 
@@ -71,7 +71,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(renderTypewriter, 400);
 
-    // 2. Project Filtering
+    // 2. Light / Dark Theme Switcher
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+
+    function setTheme(theme) {
+        if (theme === 'light') {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+            if (themeToggleBtn) themeToggleBtn.textContent = '[ Dark ]';
+        } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+            if (themeToggleBtn) themeToggleBtn.textContent = '[ Light ]';
+        }
+        localStorage.setItem('portfolio-theme', theme);
+    }
+
+    setTheme(savedTheme);
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const isCurrentlyLight = document.documentElement.classList.contains('light');
+            setTheme(isCurrentlyLight ? 'dark' : 'light');
+        });
+    }
+
+    // 3. Project Filtering
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
@@ -79,18 +105,17 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             // Update active state on buttons
             filterButtons.forEach(b => {
-                b.classList.remove('active', 'bg-code-green/10', 'text-code-green', 'border-code-green');
-                b.classList.add('border-slate-muted', 'text-gray-300');
+                b.classList.remove('active', 'bg-amber-500/10', 'text-amber-400', 'border-amber-500');
+                b.classList.add('border-slate-700/60');
             });
-            btn.classList.remove('border-slate-muted', 'text-gray-300');
-            btn.classList.add('active', 'bg-code-green/10', 'text-code-green', 'border-code-green');
+            btn.classList.remove('border-slate-700/60');
+            btn.classList.add('active', 'bg-amber-500/10', 'text-amber-400', 'border-amber-500');
 
             const filterValue = btn.getAttribute('data-filter');
 
             projectCards.forEach(card => {
                 if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                     card.style.display = 'flex';
-                    // Trigger reflow for animation if needed
                     setTimeout(() => {
                         card.style.opacity = '1';
                         card.style.transform = 'scale(1)';
@@ -106,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Project Tabs Switching
+    // 4. Project Tabs Switching
     const projectContainers = document.querySelectorAll('.project-card');
     
     projectContainers.forEach(container => {
@@ -117,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tab.addEventListener('click', () => {
                 // Remove active classes from all tabs in this container
                 tabs.forEach(t => {
-                    t.classList.remove('text-code-green', 'border-b-2', 'border-code-green');
+                    t.classList.remove('text-amber-400', 'border-b-2', 'border-amber-400');
                     t.classList.add('text-gray-500');
                 });
 
@@ -129,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Add active classes to clicked tab
                 tab.classList.remove('text-gray-500');
-                tab.classList.add('text-code-green', 'border-b-2', 'border-code-green');
+                tab.classList.add('text-amber-400', 'border-b-2', 'border-amber-400');
 
                 // Show target content
                 const targetId = tab.getAttribute('data-target');
@@ -142,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Slide-in Animations on Scroll
+    // 5. Slide-in Animations on Scroll
     const slideElements = document.querySelectorAll('.slide-in');
     
     const observerOptions = {
@@ -174,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 100);
 
-    // 5. Mini Terminal
+    // 6. Mini Terminal
     const cmdInput = document.getElementById('cmd-input');
     const cmdOutput = document.getElementById('cmd-output');
 
@@ -183,8 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const command = this.value.trim().toLowerCase();
             this.value = '';
             
-            // Echo command
-            cmdOutput.innerHTML += `<br/><span class="text-code-green">~$</span> ${command}`;
+            // Echo command with amber prompt
+            cmdOutput.innerHTML += `<br/><span class="text-amber-400 font-semibold">~$</span> ${command}`;
 
             if (command === 'help') {
                 cmdOutput.innerHTML += `<br/>Available commands:<br/>

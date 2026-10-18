@@ -6,7 +6,7 @@
     <title>Adil Ali</title>
     
     <!-- Minimalistic Terminal SVG Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300FF66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F59E0B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,8 @@
     <style type="text/tailwindcss">
         @theme {
             --color-matte-black: #0A0E17;
-            --color-code-green: #00FF66;
+            --color-accent-amber: #F59E0B;
+            --color-accent-orange: #F97316;
             --color-slate-muted: #334155;
             --color-card-bg: rgba(255, 255, 255, 0.03);
             
@@ -30,7 +31,26 @@
         }
 
         body {
-            @apply bg-matte-black text-gray-300 font-sans antialiased overflow-x-hidden selection:bg-code-green selection:text-matte-black;
+            background-color: #0A0E17;
+            color: #d1d5db;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        html.light body {
+            background-color: #F8F9FA;
+            color: #334155;
+        }
+
+        /* Subtle Engineering Grid Background */
+        .bg-grid {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 4rem 4rem;
+        }
+
+        html.light .bg-grid {
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
         }
 
         .glass-card {
@@ -40,18 +60,38 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
             border-radius: 1rem;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        html.light .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        html.light .card-header-bg {
+            background: rgba(0, 0, 0, 0.03) !important;
         }
 
         .terminal-glass {
-            background: rgba(14, 28, 28, 0.45);
+            background: rgba(24, 18, 14, 0.55);
             backdrop-filter: blur(30px) saturate(190%);
             -webkit-backdrop-filter: blur(30px) saturate(190%);
             border: 1px solid rgba(255, 255, 255, 0.12);
             box-shadow: 
                 inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
-                inset 0 0 16px 0 rgba(16, 185, 129, 0.06),
+                inset 0 0 16px 0 rgba(245, 158, 11, 0.06),
                 0 30px 60px -15px rgba(0, 0, 0, 0.75),
-                0 0 80px -10px rgba(16, 185, 129, 0.28);
+                0 0 80px -10px rgba(245, 158, 11, 0.25);
+        }
+
+        html.light .terminal-glass {
+            background: rgba(15, 23, 42, 0.94);
+            border: 1px solid rgba(15, 23, 42, 0.15);
+            box-shadow: 
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
+                0 25px 50px -12px rgba(15, 23, 42, 0.25),
+                0 0 60px -15px rgba(245, 158, 11, 0.25);
         }
 
         .terminal-header {
@@ -60,7 +100,36 @@
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        
+
+        .theme-heading {
+            color: #f4f3ef;
+            transition: color 0.3s ease;
+        }
+
+        html.light .theme-heading {
+            color: #0f172a !important;
+        }
+
+        .theme-subtext {
+            color: #9ca3af;
+            transition: color 0.3s ease;
+        }
+
+        html.light .theme-subtext {
+            color: #475569 !important;
+        }
+
+        html.light .theme-footer {
+            background-color: #f1f5f9 !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+
+        html.light .theme-footer-card {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            color: #1e293b !important;
+        }
+
         .slide-in {
             opacity: 0;
             transform: translateY(30px);
@@ -85,13 +154,16 @@
     <!-- Feather Icons for clean icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
-<body class="min-h-screen flex flex-col items-center">
-    <!-- Navbar (Optional, or just floating links) -->
-    <nav class="w-full max-w-6xl mx-auto px-6 py-4 flex justify-end items-center z-50 relative">
-        <div class="flex gap-6 text-sm font-mono">
-            <a href="#projects" class="hover:text-code-green transition-colors">Projects</a>
-            <a href="#metrics" class="hover:text-code-green transition-colors">Metrics</a>
-            <a href="#contact" class="hover:text-code-green transition-colors">Contact</a>
+<body class="min-h-screen flex flex-col items-center bg-grid selection:bg-amber-500 selection:text-black">
+    <!-- Navbar with Light/Dark Mode Switch -->
+    <nav class="w-full max-w-6xl mx-auto px-6 py-6 flex justify-end items-center z-50 relative">
+        <div class="flex items-center gap-6 text-sm font-mono">
+            <a href="#projects" class="hover:text-amber-400 transition-colors">Projects</a>
+            <a href="#metrics" class="hover:text-amber-400 transition-colors">Metrics</a>
+            <a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a>
+            <button id="theme-toggle" class="cursor-pointer text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-current opacity-75 hover:opacity-100 hover:text-amber-400 transition-all ml-2" aria-label="Toggle theme">
+                [ Light ]
+            </button>
         </div>
     </nav>
 
@@ -99,32 +171,38 @@
         
         <!-- HERO SECTION -->
         <section id="hero" class="pt-6 pb-12 md:pt-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 slide-in relative">
-            <!-- Subtle Ambient Glow -->
-            <div class="absolute -top-20 -right-20 w-[550px] h-[550px] bg-emerald-500/[0.08] rounded-full blur-3xl pointer-events-none -z-10"></div>
-            <div class="absolute top-10 left-1/3 w-[400px] h-[400px] bg-teal-500/[0.05] rounded-full blur-3xl pointer-events-none -z-10"></div>
+            <!-- Ambient Amber Glow -->
+            <div class="absolute -top-20 -right-20 w-[550px] h-[550px] bg-amber-500/[0.08] rounded-full blur-3xl pointer-events-none -z-10"></div>
+            <div class="absolute top-10 left-1/3 w-[400px] h-[400px] bg-orange-500/[0.05] rounded-full blur-3xl pointer-events-none -z-10"></div>
 
             <div class="flex-1 flex flex-col gap-5">
-                <div class="flex items-center gap-2 text-sm md:text-base text-gray-300 font-mono tracking-normal">
+                <div class="flex items-center gap-2 text-sm md:text-base font-mono tracking-normal theme-subtext">
                     <span>Hello, I'm Adil Ali</span>
-                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#00FF66] shadow-[0_0_8px_#00FF66]"></span>
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#F59E0B] shadow-[0_0_8px_#F59E0B]"></span>
                 </div>
-                <h1 class="font-display text-6xl sm:text-7xl md:text-[5rem] lg:text-[5.4rem] font-medium leading-[0.96] tracking-tight">
-                    <span class="text-[#f4f3ef] block">Building High-</span>
-                    <span class="text-[#f4f3ef] block">Performance</span>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#86EFAC] via-[#5EEAD4] to-[#6EE7B7] block">Applications &amp;</span>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#86EFAC] via-[#5EEAD4] to-[#6EE7B7] block">Cloud-Native</span>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#86EFAC] via-[#5EEAD4] to-[#6EE7B7] block">Systems.</span>
+
+                <!-- Amber Architecture Badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-mono tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.15)] w-fit mb-1">
+                    <span>⚡</span> SCALABLE ARCHITECTURE <span class="text-amber-500/60">•</span> FORWARD-THINKING
+                </div>
+
+                <h1 class="font-display text-6xl sm:text-7xl md:text-[5rem] lg:text-[5.4rem] font-medium leading-[0.96] tracking-tight theme-heading">
+                    <span class="block text-inherit">Building High-</span>
+                    <span class="block text-inherit">Performance</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] via-[#F97316] to-[#EA580C] block">Applications &amp;</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] via-[#F97316] to-[#EA580C] block">Cloud-Native</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] via-[#F97316] to-[#EA580C] block">Systems.</span>
                 </h1>
-                <p class="text-sm md:text-base text-gray-400 font-light leading-relaxed max-w-lg mt-1">
+                <p class="text-sm md:text-base theme-subtext font-light leading-relaxed max-w-lg mt-1">
                     Specializing in clean architecture, isolated code execution, and distributed software solutions that scale efficiently.
                 </p>
             </div>
             
             <!-- Code Terminal Widget with Authentic Frosted Glass UI -->
             <div class="flex-1 w-full max-w-lg relative">
-                <!-- Atmospheric Under-Glow that refracts through the translucent frosted glass -->
-                <div class="absolute -top-12 -left-10 -right-10 -bottom-10 bg-[radial-gradient(ellipse_at_50%_50%,rgba(16,185,129,0.32)_0%,rgba(13,148,136,0.22)_45%,transparent_75%)] blur-3xl pointer-events-none"></div>
-                <div class="absolute -top-16 -right-12 w-80 h-80 bg-emerald-500/25 rounded-full blur-[90px] pointer-events-none"></div>
+                <!-- Atmospheric Amber Under-Glow -->
+                <div class="absolute -top-12 -left-10 -right-10 -bottom-10 bg-[radial-gradient(ellipse_at_50%_50%,rgba(245,158,11,0.28)_0%,rgba(249,115,22,0.18)_45%,transparent_75%)] blur-3xl pointer-events-none"></div>
+                <div class="absolute -top-16 -right-12 w-80 h-80 bg-amber-500/25 rounded-full blur-[90px] pointer-events-none"></div>
 
                 <!-- Frosted Glass Terminal Window -->
                 <div class="relative rounded-[22px] overflow-hidden terminal-glass">
@@ -138,10 +216,10 @@
                     <!-- Glass Body -->
                     <div class="p-6 md:p-7 font-mono text-sm leading-relaxed text-gray-200 min-h-[300px]" id="terminal-widget">
                         <div class="mb-3 text-sm">
-                            <span class="text-[#00FF66] font-semibold">&gt;</span> <span class="text-gray-200">cat profile.json</span>
+                            <span class="text-amber-400 font-semibold">&gt;</span> <span class="text-gray-200">cat profile.json</span>
                         </div>
                         <div class="relative">
-                            <span id="typewriter-content" class="whitespace-pre font-mono"></span><span id="typewriter-cursor" class="inline-block w-2 h-4 bg-gray-300 cursor-blink ml-0.5 align-middle"></span>
+                            <span id="typewriter-content" class="whitespace-pre font-mono"></span><span id="typewriter-cursor" class="inline-block w-2 h-4 bg-amber-400 cursor-blink ml-0.5 align-middle"></span>
                         </div>
                     </div>
                 </div>
@@ -152,18 +230,18 @@
         <section id="projects" class="flex flex-col gap-8 slide-in">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
-                    <h2 class="text-3xl font-bold text-white">
+                    <h2 class="text-3xl font-bold theme-heading">
                         Architectural Showcase
                     </h2>
-                    <p class="text-gray-400 mt-2 font-mono text-sm">System implementations and core engineering projects.</p>
+                    <p class="theme-subtext mt-2 font-mono text-sm">System implementations and core engineering projects.</p>
                 </div>
                 
                 <!-- Filter Buttons -->
                 <div class="flex flex-wrap gap-2 font-mono text-xs" id="project-filters">
-                    <button class="filter-btn active px-4 py-2 rounded border border-code-green bg-code-green/10 text-code-green transition-all" data-filter="all">All</button>
-                    <button class="filter-btn px-4 py-2 rounded border border-slate-muted hover:border-code-green/50 hover:text-code-green transition-all" data-filter="monolith">Monolith</button>
-                    <button class="filter-btn px-4 py-2 rounded border border-slate-muted hover:border-code-green/50 hover:text-code-green transition-all" data-filter="microservices">Microservices</button>
-                    <button class="filter-btn px-4 py-2 rounded border border-slate-muted hover:border-code-green/50 hover:text-code-green transition-all" data-filter="devtools">DevTools</button>
+                    <button class="filter-btn active px-4 py-2 rounded border border-amber-500 bg-amber-500/10 text-amber-400 transition-all cursor-pointer" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-2 rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="monolith">Monolith</button>
+                    <button class="filter-btn px-4 py-2 rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="microservices">Microservices</button>
+                    <button class="filter-btn px-4 py-2 rounded border border-slate-700/60 theme-subtext hover:border-amber-500/50 hover:text-amber-400 transition-all cursor-pointer" data-filter="devtools">DevTools</button>
                 </div>
             </div>
 
@@ -171,28 +249,28 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="project-grid">
                 
                 <!-- Project 1: OpenRun -->
-                <div class="glass-card flex flex-col project-card" data-category="devtools">
-                    <div class="p-5 border-b border-slate-muted/40 flex justify-between items-center bg-white/5 rounded-t-xl">
-                        <h3 class="font-bold text-white flex items-center gap-2">
+                <div class="glass-card flex flex-col project-card overflow-hidden" data-category="devtools">
+                    <div class="p-5 border-b border-white/[0.08] flex justify-between items-center card-header-bg rounded-t-xl">
+                        <h3 class="font-bold theme-heading flex items-center gap-2">
                             OpenRun
-                            <a href="https://github.com/xnullcode/openrun" target="_blank" class="ml-1 text-gray-500 hover:text-code-green transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
+                            <a href="https://github.com/xnullcode/openrun" target="_blank" class="ml-1 text-gray-500 hover:text-amber-400 transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
                         </h3>
-                        <span class="text-[10px] font-mono px-2 py-1 bg-code-green/20 text-code-green rounded">DevTools</span>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-amber-500/20 text-amber-400 rounded">DevTools</span>
                     </div>
                     <div class="p-5 flex-grow flex flex-col gap-4">
-                        <p class="text-sm text-gray-400">Competitive Programming Platform & AI Editor.</p>
+                        <p class="text-sm theme-subtext">Competitive Programming Platform & AI Editor.</p>
                         
                         <!-- Tabs Header -->
-                        <div class="flex gap-4 border-b border-slate-muted/40 font-mono text-xs pb-1 project-tabs">
-                            <button class="text-code-green border-b-2 border-code-green pb-1" data-target="p1-overview">Overview</button>
-                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p1-tech">Tech</button>
-                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p1-arch">Architecture</button>
+                        <div class="flex gap-4 border-b border-slate-700/40 font-mono text-xs pb-1 project-tabs">
+                            <button class="text-amber-400 border-b-2 border-amber-400 pb-1 cursor-pointer" data-target="p1-overview">Overview</button>
+                            <button class="text-gray-500 hover:text-amber-400 pb-1 cursor-pointer" data-target="p1-tech">Tech</button>
+                            <button class="text-gray-500 hover:text-amber-400 pb-1 cursor-pointer" data-target="p1-arch">Architecture</button>
                         </div>
                         
                         <!-- Tabs Content -->
-                        <div class="text-xs text-gray-300 flex-grow relative overflow-hidden min-h-[150px]">
+                        <div class="text-xs theme-subtext flex-grow relative overflow-hidden min-h-[150px]">
                             <div id="p1-overview" class="absolute inset-0 tab-content active-tab opacity-100 transition-opacity">
-                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                <ul class="list-disc pl-4 space-y-2">
                                     <li>Real-time competitive coding environment.</li>
                                     <li>AI-assisted code generation and analysis.</li>
                                     <li>Secure, sandboxed code execution pipeline.</li>
@@ -208,7 +286,7 @@
                                 </div>
                             </div>
                             <div id="p1-arch" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
-                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                <ul class="list-disc pl-4 space-y-2">
                                     <li>Real-time SSE stream processing via Fetch API/ReadableStream.</li>
                                     <li>Isolated process harness injection mapping compiler errors to line numbers.</li>
                                     <li>Secure BYOK local storage architecture.</li>
@@ -220,26 +298,26 @@
                 </div>
 
                 <!-- Project 2: Nowait Monolith -->
-                <div class="glass-card flex flex-col project-card" data-category="monolith">
-                    <div class="p-5 border-b border-slate-muted/40 flex justify-between items-center bg-white/5 rounded-t-xl">
-                        <h3 class="font-bold text-white flex items-center gap-2">
+                <div class="glass-card flex flex-col project-card overflow-hidden" data-category="monolith">
+                    <div class="p-5 border-b border-white/[0.08] flex justify-between items-center card-header-bg rounded-t-xl">
+                        <h3 class="font-bold theme-heading flex items-center gap-2">
                             Nowait (Monolith)
-                            <a href="https://github.com/xnullcode/nowait" target="_blank" class="ml-1 text-gray-500 hover:text-code-green transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
+                            <a href="https://github.com/xnullcode/nowait" target="_blank" class="ml-1 text-gray-500 hover:text-amber-400 transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
                         </h3>
-                        <span class="text-[10px] font-mono px-2 py-1 bg-blue-500/20 text-blue-400 rounded">Monolith</span>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-orange-500/20 text-orange-400 rounded">Monolith</span>
                     </div>
                     <div class="p-5 flex-grow flex flex-col gap-4">
-                        <p class="text-sm text-gray-400">Multi-Tenant SaaS Kiosk Application.</p>
+                        <p class="text-sm theme-subtext">Multi-Tenant SaaS Kiosk Application.</p>
                         
-                        <div class="flex gap-4 border-b border-slate-muted/40 font-mono text-xs pb-1 project-tabs">
-                            <button class="text-code-green border-b-2 border-code-green pb-1" data-target="p2-overview">Overview</button>
-                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p2-tech">Tech</button>
-                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p2-arch">Architecture</button>
+                        <div class="flex gap-4 border-b border-slate-700/40 font-mono text-xs pb-1 project-tabs">
+                            <button class="text-amber-400 border-b-2 border-amber-400 pb-1 cursor-pointer" data-target="p2-overview">Overview</button>
+                            <button class="text-gray-500 hover:text-amber-400 pb-1 cursor-pointer" data-target="p2-tech">Tech</button>
+                            <button class="text-gray-500 hover:text-amber-400 pb-1 cursor-pointer" data-target="p2-arch">Architecture</button>
                         </div>
                         
-                        <div class="text-xs text-gray-300 flex-grow relative overflow-hidden min-h-[150px]">
+                        <div class="text-xs theme-subtext flex-grow relative overflow-hidden min-h-[150px]">
                             <div id="p2-overview" class="absolute inset-0 tab-content active-tab opacity-100 transition-opacity">
-                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                <ul class="list-disc pl-4 space-y-2">
                                     <li>High-performance kiosk ordering system.</li>
                                     <li>Multi-tenant architecture for restaurant chains.</li>
                                     <li>Integrated secure payment processing.</li>
@@ -255,7 +333,7 @@
                                 </div>
                             </div>
                             <div id="p2-arch" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
-                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                <ul class="list-disc pl-4 space-y-2">
                                     <li>OncePerRequestFilter JWT auth chain.</li>
                                     <li>Server-side HMAC-SHA256 Razorpay payment signature verification.</li>
                                     <li>Lazy-initialized React state from localStorage to avoid render cycles.</li>
@@ -267,26 +345,26 @@
                 </div>
 
                 <!-- Project 3: Nowait Microservices -->
-                <div class="glass-card flex flex-col project-card" data-category="microservices">
-                    <div class="p-5 border-b border-slate-muted/40 flex justify-between items-center bg-white/5 rounded-t-xl">
-                        <h3 class="font-bold text-white flex items-center gap-2">
+                <div class="glass-card flex flex-col project-card overflow-hidden" data-category="microservices">
+                    <div class="p-5 border-b border-white/[0.08] flex justify-between items-center card-header-bg rounded-t-xl">
+                        <h3 class="font-bold theme-heading flex items-center gap-2">
                             Nowait (Cloud)
-                            <a href="https://github.com/xnullcode/nowait/tree/microservices-refactor" target="_blank" class="ml-1 text-gray-500 hover:text-code-green transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
+                            <a href="https://github.com/xnullcode/nowait/tree/microservices-refactor" target="_blank" class="ml-1 text-gray-500 hover:text-amber-400 transition-colors" title="View Source"><i data-feather="external-link" class="w-3.5 h-3.5"></i></a>
                         </h3>
-                        <span class="text-[10px] font-mono px-2 py-1 bg-purple-500/20 text-purple-400 rounded">Microservices</span>
+                        <span class="text-[10px] font-mono px-2 py-1 bg-amber-600/20 text-amber-300 rounded">Microservices</span>
                     </div>
                     <div class="p-5 flex-grow flex flex-col gap-4">
-                        <p class="text-sm text-gray-400">Cloud-Native Microservices Branch.</p>
+                        <p class="text-sm theme-subtext">Cloud-Native Microservices Branch.</p>
                         
-                        <div class="flex gap-4 border-b border-slate-muted/40 font-mono text-xs pb-1 project-tabs">
-                            <button class="text-code-green border-b-2 border-code-green pb-1" data-target="p3-overview">Overview</button>
-                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p3-tech">Tech</button>
-                            <button class="text-gray-500 hover:text-gray-300 pb-1" data-target="p3-arch">Architecture</button>
+                        <div class="flex gap-4 border-b border-slate-700/40 font-mono text-xs pb-1 project-tabs">
+                            <button class="text-amber-400 border-b-2 border-amber-400 pb-1 cursor-pointer" data-target="p3-overview">Overview</button>
+                            <button class="text-gray-500 hover:text-amber-400 pb-1 cursor-pointer" data-target="p3-tech">Tech</button>
+                            <button class="text-gray-500 hover:text-amber-400 pb-1 cursor-pointer" data-target="p3-arch">Architecture</button>
                         </div>
                         
-                        <div class="text-xs text-gray-300 flex-grow relative overflow-hidden min-h-[150px]">
+                        <div class="text-xs theme-subtext flex-grow relative overflow-hidden min-h-[150px]">
                             <div id="p3-overview" class="absolute inset-0 tab-content active-tab opacity-100 transition-opacity">
-                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                <ul class="list-disc pl-4 space-y-2">
                                     <li>Distributed evolution of the Nowait platform.</li>
                                     <li>Independent scaling and deployment of domains.</li>
                                     <li>Zero-trust security model.</li>
@@ -301,7 +379,7 @@
                                 </div>
                             </div>
                             <div id="p3-arch" class="absolute inset-0 tab-content opacity-0 pointer-events-none transition-opacity">
-                                <ul class="list-disc pl-4 space-y-2 text-gray-400">
+                                <ul class="list-disc pl-4 space-y-2">
                                     <li>API routing & CORS mitigation via Gateway/Nginx proxies.</li>
                                     <li>Stateless asymmetric RSA-signed JWT validation.</li>
                                     <li>Database-per-Service pattern.</li>
@@ -317,27 +395,27 @@
 
         <!-- TECH STACK & SYSTEM METRICS -->
         <section id="metrics" class="slide-in">
-            <h2 class="text-3xl font-bold text-white mb-8">
-                System Metrics & Capabilities
+            <h2 class="text-3xl font-bold theme-heading mb-8">
+                System Metrics &amp; Capabilities
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 <!-- Metric Card 1 -->
                 <div class="glass-card p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h4 class="font-mono text-sm text-code-green">Authentication & Security</h4>
+                        <h4 class="font-mono text-sm text-amber-400 font-semibold">Authentication &amp; Security</h4>
                     </div>
                     <ul class="space-y-3">
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             Asymmetric RSA JWT
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             Spring Security Filters
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             HMAC Verification
                         </li>
                     </ul>
@@ -346,19 +424,19 @@
                 <!-- Metric Card 2 -->
                 <div class="glass-card p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h4 class="font-mono text-sm text-code-green">Infrastructure & DevOps</h4>
+                        <h4 class="font-mono text-sm text-amber-400 font-semibold">Infrastructure &amp; DevOps</h4>
                     </div>
                     <ul class="space-y-3">
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             Kubernetes Orchestration
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             Docker Containers
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             Nginx Reverse Proxies
                         </li>
                     </ul>
@@ -367,19 +445,19 @@
                 <!-- Metric Card 3 -->
                 <div class="glass-card p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h4 class="font-mono text-sm text-code-green">Frontend Architecture</h4>
+                        <h4 class="font-mono text-sm text-amber-400 font-semibold">Frontend Architecture</h4>
                     </div>
                     <ul class="space-y-3">
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             React 19 Context API
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             State Debouncing
                         </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-300">
-                            <div class="w-1.5 h-1.5 rounded-full bg-code-green"></div>
+                        <li class="flex items-center gap-2 text-sm theme-subtext">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
                             Tailwind v4 Styling
                         </li>
                     </ul>
@@ -391,38 +469,38 @@
     </main>
 
     <!-- FOOTER / CONTACT LINK TREE -->
-    <footer id="contact" class="w-full border-t border-slate-muted/20 bg-[#06090F] pt-12 pb-6 slide-in">
+    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-12 pb-6 slide-in transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
             
             <div class="flex flex-col gap-2 text-center md:text-left">
-                <h3 class="font-bold text-white text-xl">Contact Me</h3>
-                <p class="text-sm text-gray-400 font-mono">Open to new opportunities and technical discussions.</p>
+                <h3 class="font-bold theme-heading text-xl">Contact Me</h3>
+                <p class="text-sm theme-subtext font-mono">Open to new opportunities and technical discussions.</p>
                 <div class="flex gap-4 mt-4 justify-center md:justify-start">
-                    <a href="https://github.com/xnullcode" target="_blank" class="p-3 bg-white/5 rounded-full hover:bg-code-green/20 hover:text-code-green transition-all group">
+                    <a href="https://github.com/xnullcode" target="_blank" class="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 hover:text-amber-400 transition-all group">
                         <i data-feather="github" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                     </a>
-                    <a href="https://linkedin.com/in/xnullcode" target="_blank" class="p-3 bg-white/5 rounded-full hover:bg-code-green/20 hover:text-code-green transition-all group">
+                    <a href="https://linkedin.com/in/xnullcode" target="_blank" class="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 hover:text-amber-400 transition-all group">
                         <i data-feather="linkedin" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                     </a>
-                    <a href="mailto:adilalicm@gmail.com" class="p-3 bg-white/5 rounded-full hover:bg-code-green/20 hover:text-code-green transition-all group">
+                    <a href="mailto:adilalicm@gmail.com" class="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 hover:text-amber-400 transition-all group">
                         <i data-feather="mail" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Mini Terminal Simulator -->
-            <div class="w-full md:w-[400px] glass-card p-4 font-mono text-sm">
-                <div class="h-[100px] overflow-y-auto mb-2 text-gray-400" id="cmd-output">
+            <div class="w-full md:w-[400px] glass-card p-4 font-mono text-sm theme-footer-card">
+                <div class="h-[100px] overflow-y-auto mb-2 theme-subtext" id="cmd-output">
                     Type 'help' for contact info.
                 </div>
-                <div class="flex items-center gap-2 border-t border-slate-muted/40 pt-2">
-                    <span class="text-code-green">~$</span>
-                    <input type="text" id="cmd-input" class="bg-transparent border-none outline-none text-white w-full flex-grow" autocomplete="off" spellcheck="false">
+                <div class="flex items-center gap-2 border-t border-slate-700/40 pt-2">
+                    <span class="text-amber-400">~$</span>
+                    <input type="text" id="cmd-input" class="bg-transparent border-none outline-none theme-heading w-full flex-grow" autocomplete="off" spellcheck="false">
                 </div>
             </div>
 
         </div>
-        <div class="text-center mt-12 text-xs font-mono text-gray-600">
+        <div class="text-center mt-12 text-xs font-mono theme-subtext opacity-70">
             &copy; 2026 Adil Ali.
         </div>
     </footer>
