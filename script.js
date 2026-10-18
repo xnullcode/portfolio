@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (theme === 'light') {
             document.documentElement.classList.add('light');
             document.documentElement.classList.remove('dark');
-            if (themeToggleBtn) themeToggleBtn.textContent = '[ Dark ]';
+            if (themeToggleBtn) themeToggleBtn.textContent = 'Dark';
         } else {
             document.documentElement.classList.remove('light');
             document.documentElement.classList.add('dark');
-            if (themeToggleBtn) themeToggleBtn.textContent = '[ Light ]';
+            if (themeToggleBtn) themeToggleBtn.textContent = 'Light';
         }
         localStorage.setItem('portfolio-theme', theme);
     }
