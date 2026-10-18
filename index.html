@@ -11,7 +11,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@500;600;700&family=Damion&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet">
     
     <!-- Three.js for 3D Background Waves -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -41,6 +42,7 @@
             --font-sans: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
             --font-display: 'Druk Condensed', 'Druk Wide', 'Druk', 'Antonio', 'Oswald', sans-serif;
+            --font-satoshi: 'Satoshi', sans-serif;
         }
 
         body {
@@ -52,6 +54,11 @@
         html.light body {
             background-color: #F8F9FA;
             color: #334155;
+        }
+
+        /* Offset for smooth scrolling with floating header */
+        section[id], footer[id] {
+            scroll-margin-top: 5.5rem;
         }
 
         /* Subtle Engineering Grid Background */
@@ -74,6 +81,150 @@
             height: 100vh;
             pointer-events: none;
             z-index: 0;
+        }
+
+        /* Top-Left (VAR 01 // Gradient Scrim): Soft dark radial shadow behind text that gently dims the wave */
+        .hero-subtext-scrim {
+            background: radial-gradient(ellipse 70% 65% at 45% 50%, rgba(11, 15, 23, 0.88) 0%, rgba(11, 15, 23, 0.50) 45%, transparent 75%);
+            filter: blur(6px);
+            transition: background 0.3s ease;
+        }
+
+        html.light .hero-subtext-scrim {
+            background: radial-gradient(ellipse 70% 65% at 45% 50%, rgba(248, 250, 252, 0.90) 0%, rgba(248, 250, 252, 0.55) 45%, transparent 75%);
+        }
+
+        /* 3D Glass Floating Rounded Rectangle Header */
+        .header-floating-glass {
+            background: rgba(14, 18, 28, 0.60);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-left: 1px solid rgba(255, 255, 255, 0.12);
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+            border-radius: 1.15rem;
+            box-shadow: 
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.28),
+                inset 0 -1px 1px 0 rgba(0, 0, 0, 0.35),
+                0 16px 40px -8px rgba(0, 0, 0, 0.60),
+                0 4px 12px -2px rgba(0, 0, 0, 0.35);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        html.light .header-floating-glass {
+            background: rgba(255, 255, 255, 0.72);
+            border-top: 1px solid rgba(255, 255, 255, 1);
+            border-left: 1px solid rgba(255, 255, 255, 0.85);
+            border-right: 1px solid rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 
+                inset 0 1px 2px 0 rgba(255, 255, 255, 1),
+                inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04),
+                0 12px 35px -6px rgba(15, 23, 42, 0.09),
+                0 4px 12px -2px rgba(15, 23, 42, 0.04);
+        }
+
+        /* Cursive Monoline Script for Header Brand */
+        .header-cursive-brand {
+            font-family: 'Damion', 'Caveat', cursive;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            transition: color 0.25s ease, text-shadow 0.25s ease;
+        }
+
+        .header-cursive-brand.active {
+            color: #f59e0b !important;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.7), 0 0 20px rgba(245, 158, 11, 0.35);
+        }
+
+        html.light .header-cursive-brand.active {
+            color: #d97706 !important;
+            text-shadow: 0 0 8px rgba(217, 119, 6, 0.35);
+        }
+
+        /* 3D Glass Quote Interlude Cards */
+        .quote-glass-card {
+            background: rgba(14, 18, 28, 0.60);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-left: 1px solid rgba(255, 255, 255, 0.12);
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+            border-radius: 1.25rem;
+            box-shadow: 
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.28),
+                inset 0 -1px 1px 0 rgba(0, 0, 0, 0.35),
+                0 16px 40px -8px rgba(0, 0, 0, 0.60),
+                0 4px 12px -2px rgba(0, 0, 0, 0.35);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        html.light .quote-glass-card {
+            background: rgba(255, 255, 255, 0.72);
+            border-top: 1px solid rgba(255, 255, 255, 1);
+            border-left: 1px solid rgba(255, 255, 255, 0.85);
+            border-right: 1px solid rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 
+                inset 0 1px 2px 0 rgba(255, 255, 255, 1),
+                inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04),
+                0 12px 35px -6px rgba(15, 23, 42, 0.09),
+                0 4px 12px -2px rgba(15, 23, 42, 0.04);
+        }
+
+        /* Navigation Links & Scrollspy Active Glow */
+        .nav-link {
+            position: relative;
+            transition: color 0.25s ease, text-shadow 0.25s ease, opacity 0.25s ease;
+            opacity: 0.75;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
+        }
+
+        .nav-link.active {
+            opacity: 1;
+            color: #f59e0b !important;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.7), 0 0 20px rgba(245, 158, 11, 0.35);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #f59e0b;
+            border-radius: 9999px;
+            box-shadow: 0 0 8px #f59e0b, 0 0 14px rgba(245, 158, 11, 0.6);
+            animation: fadeInGlow 0.25s ease-out forwards;
+        }
+
+        html.light .nav-link.active {
+            color: #d97706 !important;
+            text-shadow: 0 0 8px rgba(217, 119, 6, 0.35);
+        }
+
+        html.light .nav-link.active::after {
+            background: #d97706;
+            box-shadow: 0 0 6px rgba(217, 119, 6, 0.45);
+        }
+
+        @keyframes fadeInGlow {
+            from {
+                opacity: 0;
+                transform: scaleX(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
         }
 
         .glass-card {
@@ -263,28 +414,38 @@
     <!-- 3D Undulating Wireframe Wave Canvas (Full Website Background) -->
     <canvas id="hero-waves-canvas" class="site-waves-canvas"></canvas>
 
-    <!-- Navbar with Light/Dark Mode Switch -->
-    <nav class="w-full max-w-6xl mx-auto px-6 py-6 flex justify-end items-center z-50 relative">
-        <div class="flex items-center gap-6 text-sm font-mono">
-            <a href="#projects" class="hover:text-amber-400 transition-colors">Projects</a>
-            <a href="#metrics" class="hover:text-amber-400 transition-colors">Metrics</a>
-            <a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a>
-            <button id="theme-toggle" class="cursor-pointer text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-current opacity-75 hover:opacity-100 hover:text-amber-400 transition-all ml-2" aria-label="Toggle theme">
-                Light
-            </button>
-        </div>
-    </nav>
+    <!-- 3D Glass Floating Rounded Rectangle Header -->
+    <header class="fixed top-4 left-0 right-0 w-full z-50 flex justify-center px-4 sm:px-6 pointer-events-none">
+        <nav class="header-floating-glass pointer-events-auto w-full max-w-5xl px-5 sm:px-7 py-2.5 sm:py-3 flex items-center justify-between">
+            <!-- Left: Adil in Stylish Cursive Script Typography (No Orange Dot) -->
+            <div class="flex items-center">
+                <a href="#hero" class="header-cursive-brand active text-2xl sm:text-3xl theme-heading hover:text-amber-400 transition-colors duration-200 select-none" aria-label="Adil - Scroll to top">
+                    Adil
+                </a>
+            </div>
 
-    <main class="w-full max-w-6xl mx-auto px-6 flex-grow flex flex-col gap-32 pb-24 relative z-10">
+            <!-- Right: Current Navigation & Theme Toggle -->
+            <div class="flex items-center gap-5 sm:gap-7 text-sm font-satoshi font-medium">
+                <a href="#projects" class="nav-link hover:text-amber-400 transition-colors">Projects</a>
+                <a href="#metrics" class="nav-link hover:text-amber-400 transition-colors">Metrics</a>
+                <a href="#contact" class="nav-link hover:text-amber-400 transition-colors">Contact</a>
+                <button id="theme-toggle" class="cursor-pointer text-xs font-satoshi font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-current opacity-75 hover:opacity-100 hover:text-amber-400 transition-all ml-1" aria-label="Toggle theme">
+                    Light
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto px-6 pt-24 md:pt-28 flex-grow flex flex-col gap-24 md:gap-32 pb-24 relative z-10">
         
         <!-- HERO SECTION -->
-        <section id="hero" class="pt-6 pb-12 md:pt-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 slide-in relative">
+        <section id="hero" class="pt-6 pb-12 md:pt-10 md:pb-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 slide-in relative">
             <!-- Ambient Amber Glow -->
             <div class="absolute -top-20 -right-20 w-[550px] h-[550px] bg-amber-500/[0.08] rounded-full blur-3xl pointer-events-none -z-10"></div>
             <div class="absolute top-10 left-1/3 w-[400px] h-[400px] bg-orange-500/[0.05] rounded-full blur-3xl pointer-events-none -z-10"></div>
 
             <div class="flex-1 flex flex-col gap-5">
-                <div class="flex items-center gap-2 text-sm md:text-base font-mono tracking-normal theme-subtext">
+                <div id="hero-greeting" class="flex items-center gap-2 text-sm md:text-base font-satoshi font-medium tracking-normal theme-subtext">
                     <span>Hello, I'm Adil Ali</span>
                     <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#F59E0B] shadow-[0_0_8px_#F59E0B]"></span>
                 </div>
@@ -298,9 +459,13 @@
                         <span class="block pb-2">Systems.</span>
                     </span>
                 </h1>
-                <p class="text-sm md:text-base theme-subtext font-light leading-relaxed max-w-lg mt-1">
-                    Specializing in clean architecture, isolated code execution, and distributed software solutions that scale efficiently.
-                </p>
+                <div class="relative max-w-lg mt-1">
+                    <!-- Top-Left (VAR 01 // Gradient Scrim): Soft dark radial shadow behind text that gently dims the wave -->
+                    <div class="hero-subtext-scrim absolute -inset-x-4 -inset-y-2 rounded-xl pointer-events-none -z-10" aria-hidden="true"></div>
+                    <p class="text-sm md:text-base theme-subtext font-light leading-relaxed relative z-10">
+                        Specializing in clean architecture, isolated code execution, and distributed software solutions that scale efficiently.
+                    </p>
+                </div>
             </div>
             
             <!-- Code Terminal Widget with Authentic Frosted Glass UI -->
@@ -330,6 +495,27 @@
                 </div>
             </div>
         </section>
+ 
+        <!-- INTERLUDE QUOTE 01 (Between Hero & Architectural Showcase) -->
+        <div class="w-full flex justify-center slide-in my-2">
+            <div class="quote-glass-card max-w-2xl w-full p-6 sm:p-7 relative overflow-hidden group">
+                <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex items-start gap-4 sm:gap-5">
+                    <span class="text-amber-400 font-serif text-4xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
+                    <div class="flex flex-col gap-2.5">
+                        <blockquote class="text-sm sm:text-base font-satoshi font-medium leading-relaxed theme-heading italic">
+                            Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+                        </blockquote>
+                        <div class="flex items-center gap-2 text-xs font-mono theme-subtext">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                            <span class="text-amber-400 font-semibold">Martin Fowler</span>
+                            <span class="opacity-40">//</span>
+                            <span>Refactoring &amp; Software Craftsmanship</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- ARCHITECTURAL SHOWCASE -->
         <section id="projects" class="flex flex-col gap-8 slide-in">
@@ -338,7 +524,7 @@
                     <h2 class="text-3xl font-bold theme-heading">
                         Architectural Showcase
                     </h2>
-                    <p class="theme-subtext mt-2 font-mono text-sm">System implementations and core engineering projects.</p>
+                    <p class="theme-subtext mt-2 font-satoshi text-sm">System implementations and core engineering projects.</p>
                 </div>
                 
                 <!-- Filter Buttons -->
@@ -497,6 +683,27 @@
 
             </div>
         </section>
+ 
+        <!-- INTERLUDE QUOTE 02 (Between Architectural Showcase & Tech Capabilities) -->
+        <div class="w-full flex justify-center slide-in my-2">
+            <div class="quote-glass-card max-w-2xl w-full p-6 sm:p-7 relative overflow-hidden group">
+                <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex items-start gap-4 sm:gap-5">
+                    <span class="text-amber-400 font-serif text-4xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
+                    <div class="flex flex-col gap-2.5">
+                        <blockquote class="text-sm sm:text-base font-satoshi font-medium leading-relaxed theme-heading italic">
+                            There are two ways of constructing software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies.
+                        </blockquote>
+                        <div class="flex items-center gap-2 text-xs font-mono theme-subtext">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                            <span class="text-amber-400 font-semibold">Sir C.A.R. Hoare</span>
+                            <span class="opacity-40">//</span>
+                            <span>Turing Award Laureate &amp; Creator of CSP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- TECH STACK & SYSTEM CAPABILITIES -->
         <section id="metrics" class="slide-in">
@@ -571,42 +778,184 @@
             </div>
         </section>
 
+        <!-- INTERLUDE QUOTE 03 (Between Tech Capabilities & Contact/Footer) -->
+        <div class="w-full flex justify-center slide-in my-2">
+            <div class="quote-glass-card max-w-2xl w-full p-6 sm:p-7 relative overflow-hidden group">
+                <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex items-start gap-4 sm:gap-5">
+                    <span class="text-amber-400 font-serif text-4xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
+                    <div class="flex flex-col gap-2.5">
+                        <blockquote class="text-sm sm:text-base font-satoshi font-medium leading-relaxed theme-heading italic">
+                            A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable.
+                        </blockquote>
+                        <div class="flex items-center gap-2 text-xs font-mono theme-subtext">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                            <span class="text-amber-400 font-semibold">Leslie Lamport</span>
+                            <span class="opacity-40">//</span>
+                            <span>Turing Award Laureate &amp; Distributed Systems Pioneer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
-    <!-- FOOTER / CONTACT LINK TREE -->
-    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-12 pb-6 slide-in transition-colors duration-300 relative z-10">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+    <!-- EXPANDED HIGH-IMPACT FOOTER & CONTACT SYSTEM -->
+    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-16 md:pt-24 pb-12 slide-in transition-colors duration-300 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col gap-14">
             
-            <div class="flex flex-col gap-2 text-center md:text-left">
-                <h3 class="font-bold theme-heading text-xl">Contact Me</h3>
-                <p class="text-sm theme-subtext font-mono">Open to new opportunities and discussions.</p>
-                <div class="flex gap-4 mt-4 justify-center md:justify-start">
-                    <a href="https://github.com/xnullcode" target="_blank" class="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 hover:text-amber-400 transition-all group">
-                        <i data-feather="github" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+            <!-- Top Footer Banner: Big Cursive Brand, Availability, and Get in Touch CTA -->
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 pb-10 border-b border-slate-700/30">
+                <div class="flex flex-col gap-3 max-w-xl">
+                    <div class="flex items-center gap-3">
+                        <span class="header-cursive-brand text-4xl sm:text-5xl text-amber-400 select-none">Adil</span>
+                        <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold uppercase tracking-wider">
+                            Full-Stack &amp; Systems Engineer
+                        </span>
+                    </div>
+                    <p class="text-base sm:text-lg theme-subtext font-satoshi font-light leading-relaxed">
+                        Engineering distributed backends, clean application architecture, and resilient cloud systems that scale seamlessly.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-mono text-emerald-400">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                        <span>Available for engineering roles, technical leadership &amp; consulting</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full lg:w-auto">
+                    <a href="mailto:adilalicm@gmail.com" class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-mono text-xs font-semibold uppercase tracking-wider hover:bg-amber-500 hover:text-black hover:shadow-[0_0_24px_rgba(245,158,11,0.4)] transition-all">
+                        <i data-feather="mail" class="w-4 h-4"></i>
+                        <span>Initiate Discussion</span>
                     </a>
-                    <a href="https://linkedin.com/in/xnullcode" target="_blank" class="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 hover:text-amber-400 transition-all group">
-                        <i data-feather="linkedin" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
-                    </a>
-                    <a href="mailto:adilalicm@gmail.com" class="p-3 bg-white/5 rounded-full hover:bg-amber-500/20 hover:text-amber-400 transition-all group">
-                        <i data-feather="mail" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                    <a href="https://github.com/xnullcode" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border border-slate-700/60 theme-subtext hover:text-amber-400 hover:border-amber-500/40 font-mono text-xs font-medium uppercase tracking-wider transition-all">
+                        <i data-feather="github" class="w-4 h-4"></i>
+                        <span>GitHub</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Mini Terminal Simulator -->
-            <div class="w-full md:w-[400px] glass-card p-4 font-mono text-sm theme-footer-card">
-                <div class="h-[100px] overflow-y-auto mb-2 theme-subtext" id="cmd-output">
-                    Type 'help' for contact info.
+            <!-- Main Footer Grid: 4 Pillars of Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                
+                <!-- Pillar 1: Connect & Profile Info -->
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-amber-400 font-semibold">Connect // Channels</h4>
+                    <p class="text-xs theme-subtext leading-relaxed font-satoshi">
+                        Open to technical discussions, architectural debates, and high-impact engineering opportunities globally.
+                    </p>
+                    <div class="flex flex-col gap-2.5 text-xs font-mono theme-subtext mt-1">
+                        <a href="https://github.com/xnullcode" target="_blank" class="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                            <i data-feather="github" class="w-4 h-4 text-amber-400"></i>
+                            <span>github.com/xnullcode</span>
+                        </a>
+                        <a href="https://linkedin.com/in/xnullcode" target="_blank" class="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                            <i data-feather="linkedin" class="w-4 h-4 text-amber-400"></i>
+                            <span>linkedin.com/in/xnullcode</span>
+                        </a>
+                        <a href="mailto:adilalicm@gmail.com" class="flex items-center gap-2 hover:text-amber-400 transition-colors">
+                            <i data-feather="mail" class="w-4 h-4 text-amber-400"></i>
+                            <span>adilalicm@gmail.com</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="flex items-center gap-2 border-t border-slate-700/40 pt-2">
-                    <span class="text-amber-400">~$</span>
-                    <input type="text" id="cmd-input" class="bg-transparent border-none outline-none theme-heading w-full flex-grow" autocomplete="off" spellcheck="false">
+
+                <!-- Pillar 2: Architectural Domains -->
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-amber-400 font-semibold">Core Focus // Domains</h4>
+                    <ul class="space-y-2 text-xs font-mono theme-subtext">
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400/60"></span>
+                            Distributed Systems &amp; Go
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400/60"></span>
+                            Spring Boot Enterprise Services
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400/60"></span>
+                            Kubernetes &amp; Containerization
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400/60"></span>
+                            RS256 JWT Security Filters
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400/60"></span>
+                            React 19 &amp; 3D Visual Contexts
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 3: Quick Navigation -->
+                <div class="flex flex-col gap-4">
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-amber-400 font-semibold">Sitemap // Navigation</h4>
+                    <ul class="space-y-2 text-xs font-mono theme-subtext">
+                        <li>
+                            <a href="#hero" class="hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <span class="opacity-40">&gt;</span> Top // Hero Section
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#projects" class="hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <span class="opacity-40">&gt;</span> Architectural Showcase
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#metrics" class="hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <span class="opacity-40">&gt;</span> Technical Capabilities
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="hover:text-amber-400 transition-colors flex items-center gap-2">
+                                <span class="opacity-40">&gt;</span> Contact &amp; Terminal
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="pt-2 text-xs font-mono opacity-60">
+                        <span>Base: India (IST // UTC+5:30)</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 4: Interactive Terminal Console -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-mono text-xs uppercase tracking-widest text-amber-400 font-semibold">CLI Terminal Simulator</h4>
+                        <span class="text-[10px] font-mono opacity-50">v1.2.0</span>
+                    </div>
+                    <div class="w-full glass-card p-4 font-mono text-xs theme-footer-card">
+                        <div class="flex items-center gap-1.5 pb-2.5 mb-2 border-b border-slate-700/40">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+                            <span class="text-[11px] opacity-60 ml-1">guest@adil-shell:~$</span>
+                        </div>
+                        <div class="h-[105px] overflow-y-auto mb-2 theme-subtext leading-relaxed" id="cmd-output">
+                            Type <span class="text-amber-400 font-semibold">help</span> to view commands.
+                        </div>
+                        <div class="flex items-center gap-2 border-t border-slate-700/40 pt-2">
+                            <span class="text-amber-400 font-bold">~$</span>
+                            <input type="text" id="cmd-input" class="bg-transparent border-none outline-none theme-heading w-full flex-grow text-xs font-mono" placeholder="command..." autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Sub-Footer Bar -->
+            <div class="pt-8 border-t border-slate-700/30 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono theme-subtext opacity-75">
+                <div>
+                    &copy; 2026 Adil Ali. Designed &amp; engineered for high-performance software.
+                </div>
+                <div class="flex items-center gap-6">
+                    <span>Three.js &bull; Tailwind v4</span>
+                    <button id="back-to-top" class="inline-flex items-center gap-1.5 hover:text-amber-400 transition-colors cursor-pointer" aria-label="Back to top">
+                        <i data-feather="arrow-up" class="w-3.5 h-3.5"></i>
+                        <span>Back to Top</span>
+                    </button>
                 </div>
             </div>
 
-        </div>
-        <div class="text-center mt-12 text-xs font-mono theme-subtext opacity-70">
-            &copy; 2026 Adil Ali.
         </div>
     </footer>
 

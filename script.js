@@ -171,10 +171,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Slide-in Animations on Scroll
     const slideElements = document.querySelectorAll('.slide-in');
     
+    function checkSlideVisibility() {
+        slideElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight + 50) {
+                el.classList.add('visible');
+            }
+        });
+    }
+
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+        rootMargin: '50px',
+        threshold: 0.05
     };
 
     const scrollObserver = new IntersectionObserver((entries, observer) => {
@@ -190,15 +199,11 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollObserver.observe(el);
     });
 
-    // Trigger initial check
-    setTimeout(() => {
-        slideElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight) {
-                el.classList.add('visible');
-            }
-        });
-    }, 100);
+    window.addEventListener('scroll', checkSlideVisibility, { passive: true });
+
+    // Initial check
+    setTimeout(checkSlideVisibility, 100);
+    setTimeout(checkSlideVisibility, 400);
 
     // 6. Mini Terminal
     const cmdInput = document.getElementById('cmd-input');
@@ -237,5 +242,103 @@ document.addEventListener('DOMContentLoaded', () => {
             cmdOutput.scrollTop = cmdOutput.scrollHeight;
         }
     });
+
+    // 7. Header Brand Click (Smooth Scroll to Top)
+    const brandTitle = document.querySelector('.header-cursive-brand');
+    if (brandTitle) {
+        brandTitle.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 8. Scrollspy: Highlight Active Nav Link (Hero/Adil, Projects, Metrics, Contact)
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = [
+        { id: 'hero', el: document.getElementById('hero') },
+        { id: 'projects', el: document.getElementById('projects') },
+        { id: 'metrics', el: document.getElementById('metrics') },
+        { id: 'contact', el: document.getElementById('contact') }
+    ];
+
+    function updateScrollspy() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        let activeId = 'hero';
+
+        // If user scrolled near bottom, activate Contact
+        if (scrollY + windowHeight >= documentHeight - 100) {
+            activeId = 'contact';
+        } else {
+            // Trigger threshold: 240px from top of viewport
+            const triggerPoint = 240;
+            
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                if (section.el) {
+                    const rect = section.el.getBoundingClientRect();
+                    if (rect.top <= triggerPoint) {
+                        activeId = section.id;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 1. Brand 'Adil' is glowing orange when in top Hero section
+        if (brandTitle) {
+            if (activeId === 'hero') {
+                brandTitle.classList.add('active');
+            } else {
+                brandTitle.classList.remove('active');
+            }
+        }
+
+        // 2. Navigation links light up when their corresponding section is active
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (activeId !== 'hero' && href === `#${activeId}`) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateScrollspy, { passive: true });
+    window.addEventListener('resize', updateScrollspy, { passive: true });
+    updateScrollspy();
+
+    // 9. Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 9. Initial Scroll URL or Hash Handling
+    const scrollParam = urlParams.get('scroll');
+    if (scrollParam) {
+        const targetScroll = parseInt(scrollParam, 10);
+        window.scrollTo(0, targetScroll);
+        updateScrollspy();
+        checkSlideVisibility();
+        setTimeout(() => {
+            window.scrollTo(0, targetScroll);
+            updateScrollspy();
+            checkSlideVisibility();
+        }, 150);
+    }
+
+    if (window.location.hash) {
+        setTimeout(() => {
+            updateScrollspy();
+            checkSlideVisibility();
+        }, 150);
+    }
 
 });
