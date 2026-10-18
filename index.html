@@ -98,34 +98,23 @@
             z-index: 0;
         }
 
-        /* Top-Left (VAR 01 // Gradient Scrim): Soft dark radial shadow behind text that gently dims the wave */
-        .hero-subtext-scrim {
-            background: radial-gradient(ellipse 70% 65% at 45% 50%, rgba(11, 15, 23, 0.88) 0%, rgba(11, 15, 23, 0.50) 45%, transparent 75%);
-            filter: blur(6px);
-            transition: background 0.3s ease;
-        }
-
-        html.light .hero-subtext-scrim {
-            background: radial-gradient(ellipse 70% 65% at 45% 50%, rgba(248, 250, 252, 0.90) 0%, rgba(248, 250, 252, 0.55) 45%, transparent 75%);
-        }
-
-        /* Ambient Glow all around the top hero section: seamless radial falloff without harsh edges */
+        /* Ambient Glow all around the top hero section: subtle and soft radial warmth */
         .hero-ambient-glow {
             position: absolute;
-            inset: -5rem -10% -4rem -10%;
+            inset: -4rem -8% -3rem -8%;
             background: 
-                radial-gradient(circle 420px at 75% 42%, rgba(249, 115, 22, 0.14) 0%, rgba(245, 158, 11, 0.06) 50%, transparent 75%),
-                radial-gradient(circle 380px at 25% 40%, rgba(245, 158, 11, 0.12) 0%, rgba(234, 88, 12, 0.05) 50%, transparent 75%),
-                radial-gradient(ellipse 90% 75% at 50% 45%, rgba(245, 158, 11, 0.09) 0%, rgba(249, 115, 22, 0.035) 45%, transparent 75%);
+                radial-gradient(circle 360px at 75% 45%, rgba(249, 115, 22, 0.06) 0%, rgba(245, 158, 11, 0.02) 50%, transparent 70%),
+                radial-gradient(circle 320px at 25% 40%, rgba(245, 158, 11, 0.05) 0%, rgba(234, 88, 12, 0.015) 50%, transparent 70%),
+                radial-gradient(ellipse 85% 70% at 50% 45%, rgba(245, 158, 11, 0.04) 0%, rgba(249, 115, 22, 0.015) 45%, transparent 70%);
             pointer-events: none;
             z-index: -10;
         }
 
         html.light .hero-ambient-glow {
             background: 
-                radial-gradient(circle 420px at 75% 42%, rgba(251, 146, 60, 0.18) 0%, rgba(245, 158, 11, 0.08) 50%, transparent 75%),
-                radial-gradient(circle 380px at 25% 40%, rgba(251, 191, 36, 0.15) 0%, rgba(249, 115, 22, 0.06) 50%, transparent 75%),
-                radial-gradient(ellipse 90% 75% at 50% 45%, rgba(254, 215, 170, 0.24) 0%, rgba(253, 186, 116, 0.08) 45%, transparent 75%);
+                radial-gradient(circle 360px at 75% 45%, rgba(251, 146, 60, 0.07) 0%, rgba(245, 158, 11, 0.025) 50%, transparent 70%),
+                radial-gradient(circle 320px at 25% 40%, rgba(251, 191, 36, 0.06) 0%, rgba(249, 115, 22, 0.02) 50%, transparent 70%),
+                radial-gradient(ellipse 85% 70% at 50% 45%, rgba(254, 215, 170, 0.09) 0%, rgba(253, 186, 116, 0.025) 45%, transparent 70%);
         }
 
         /* 3D Glass Floating Rounded Rectangle Header */
@@ -505,10 +494,8 @@
                         <span class="block pb-2">Systems.</span>
                     </span>
                 </h1>
-                <div class="relative max-w-lg mt-1">
-                    <!-- Top-Left (VAR 01 // Gradient Scrim): Soft dark radial shadow behind text that gently dims the wave -->
-                    <div class="hero-subtext-scrim absolute -inset-x-4 -inset-y-2 rounded-xl pointer-events-none -z-10" aria-hidden="true"></div>
-                    <p class="text-xs sm:text-sm md:text-base theme-subtext font-light leading-relaxed relative z-10">
+                <div class="max-w-lg mt-1">
+                    <p class="text-xs sm:text-sm md:text-base theme-subtext font-light leading-relaxed">
                         Specializing in clean architecture, isolated code execution, and distributed software solutions that scale efficiently.
                     </p>
                 </div>
@@ -516,8 +503,8 @@
             
             <!-- Code Terminal Widget with Authentic Frosted Glass UI -->
             <div class="flex-1 w-full max-w-lg relative">
-                <!-- Atmospheric Amber Under-Glow: seamlessly fading without edge clipping -->
-                <div class="absolute -inset-4 sm:-inset-6 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.12)_0%,rgba(249,115,22,0.04)_50%,transparent_72%)] pointer-events-none -z-10"></div>
+                <!-- Atmospheric Amber Under-Glow: subtle and softly fading -->
+                <div class="absolute -inset-4 sm:-inset-6 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.06)_0%,transparent_65%)] pointer-events-none -z-10"></div>
 
                 <!-- Frosted Glass Terminal Window -->
                 <div class="relative rounded-[22px] overflow-hidden terminal-glass">
