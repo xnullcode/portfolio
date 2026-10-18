@@ -96,22 +96,31 @@
                 </p>
             </div>
             
-            <!-- Code Terminal Widget -->
-            <div class="flex-1 w-full max-w-lg glass-card rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0c1219]/80 backdrop-blur-xl shadow-2xl shadow-emerald-950/20">
-                <!-- Terminal Header -->
-                <div class="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.05] bg-black/40">
-                    <div class="w-3 h-3 rounded-full bg-[#EF4444]"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#F59E0B]"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#10B981]"></div>
-                    <span class="ml-2 text-xs font-mono text-gray-400">guest@dev-env: ~</span>
-                </div>
-                <!-- Terminal Body -->
-                <div class="p-6 md:p-7 font-mono text-sm leading-relaxed text-gray-300 min-h-[300px]" id="terminal-widget">
-                    <div class="mb-3 text-sm">
-                        <span class="text-[#00FF66] font-semibold">&gt;</span> <span class="text-gray-300">cat profile.json</span>
-                    </div>
-                    <div class="relative">
-                        <span id="typewriter-content" class="whitespace-pre font-mono"></span><span id="typewriter-cursor" class="inline-block w-2 h-4 bg-gray-400 cursor-blink ml-0.5 align-middle"></span>
+            <!-- Code Terminal Widget with Ambient Gradient Halo -->
+            <div class="flex-1 w-full max-w-lg relative group">
+                <!-- Atmospheric Ambient Glow (Bloom behind terminal) -->
+                <div class="absolute -inset-3 bg-gradient-to-tr from-emerald-500/25 via-teal-500/20 to-emerald-400/20 rounded-3xl blur-2xl pointer-events-none opacity-85 transition-opacity duration-700"></div>
+                <div class="absolute -top-16 -right-12 w-80 h-80 bg-emerald-500/20 rounded-full blur-[90px] pointer-events-none"></div>
+
+                <!-- Glass Card Container with Gradient Rim Border -->
+                <div class="relative rounded-2xl p-[1px] bg-gradient-to-b from-white/20 via-white/5 to-emerald-500/15 shadow-[0_0_60px_-15px_rgba(16,185,129,0.25)]">
+                    <div class="rounded-2xl overflow-hidden bg-[#0c1219]/90 backdrop-blur-xl">
+                        <!-- Terminal Header -->
+                        <div class="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.05] bg-black/40">
+                            <div class="w-3 h-3 rounded-full bg-[#EF4444]"></div>
+                            <div class="w-3 h-3 rounded-full bg-[#F59E0B]"></div>
+                            <div class="w-3 h-3 rounded-full bg-[#10B981]"></div>
+                            <span class="ml-2 text-xs font-mono text-gray-400">guest@dev-env: ~</span>
+                        </div>
+                        <!-- Terminal Body -->
+                        <div class="p-6 md:p-7 font-mono text-sm leading-relaxed text-gray-300 min-h-[300px]" id="terminal-widget">
+                            <div class="mb-3 text-sm">
+                                <span class="text-[#00FF66] font-semibold">&gt;</span> <span class="text-gray-300">cat profile.json</span>
+                            </div>
+                            <div class="relative">
+                                <span id="typewriter-content" class="whitespace-pre font-mono"></span><span id="typewriter-cursor" class="inline-block w-2 h-4 bg-gray-400 cursor-blink ml-0.5 align-middle"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
