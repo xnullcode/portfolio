@@ -47,8 +47,14 @@
             --font-satoshi: 'Satoshi', sans-serif;
         }
 
-        html, body {
+        html {
             overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        body {
+            overflow-x: clip;
+            overflow-y: visible;
             max-width: 100%;
             width: 100%;
             -webkit-text-size-adjust: 100%;
@@ -523,7 +529,7 @@
                         <span class="ml-2 text-xs font-mono terminal-header-title">guest@dev-env: ~</span>
                     </div>
                     <!-- Glass Body -->
-                    <div class="p-4 sm:p-6 md:p-7 font-mono text-xs sm:text-sm leading-relaxed text-gray-200 min-h-[260px] sm:min-h-[300px] overflow-x-auto" id="terminal-widget">
+                    <div class="p-4 sm:p-6 md:p-7 font-mono text-xs sm:text-sm leading-relaxed text-gray-200 min-h-[260px] sm:min-h-[300px] overflow-x-auto touch-pan-y" id="terminal-widget" style="overflow-y: hidden;">
                         <div class="mb-3 text-xs sm:text-sm">
                             <span class="terminal-prompt-arrow text-amber-400 font-semibold">&gt;</span> <span class="terminal-prompt-cmd text-gray-200">cat profile.json</span>
                         </div>
