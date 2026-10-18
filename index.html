@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Adil Ali</title>
     
+    <!-- Early Browser/System Theme Detection -->
+    <script>
+        (function() {
+            try {
+                var urlParams = new URLSearchParams(window.location.search);
+                var urlTheme = urlParams.get('theme');
+                var savedTheme = localStorage.getItem('portfolio-user-theme');
+                var isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = (urlTheme === 'light' || urlTheme === 'dark') ? urlTheme : (savedTheme || (isSystemDark ? 'dark' : 'light'));
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                } else {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch(e) {}
+        })();
+    </script>
+    
     <!-- Material You Terminal Favicon -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">

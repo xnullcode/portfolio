@@ -71,12 +71,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(renderTypewriter, 400);
 
-    // 2. Light / Dark Theme Switcher (Default: light)
+    // 2. Browser/OS Theme Detection & Switcher (Fallback: light)
     const themeToggleBtn = document.getElementById('theme-toggle');
     const urlParams = new URLSearchParams(window.location.search);
-    const savedTheme = urlParams.get('theme') || localStorage.getItem('portfolio-theme-v2') || 'light';
 
-    function setTheme(theme) {
+    function getSystemTheme() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+        }
+        return 'light';
+    }
+
+    function getInitialTheme() {
+        const urlTheme = urlParams.get('theme');
+        if (urlTheme === 'light' || urlTheme === 'dark') return urlTheme;
+
+        const savedUserTheme = localStorage.getItem('portfolio-user-theme');
+        if (savedUserTheme === 'light' || savedUserTheme === 'dark') return savedUserTheme;
+
+        return getSystemTheme();
+    }
+
+    function setTheme(theme, isManual = false) {
         if (theme === 'dark') {
             document.documentElement.classList.remove('light');
             document.documentElement.classList.add('dark');
@@ -86,17 +102,36 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.classList.remove('dark');
             if (themeToggleBtn) themeToggleBtn.textContent = 'Dark';
         }
-        localStorage.setItem('portfolio-theme-v2', theme);
-        localStorage.setItem('portfolio-theme', theme);
+
+        if (isManual) {
+            localStorage.setItem('portfolio-user-theme', theme);
+        }
     }
 
-    setTheme(savedTheme);
+    // Initialize theme state (button label & document class)
+    setTheme(getInitialTheme(), false);
 
+    // User manual toggle (saves explicit preference)
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
             const isCurrentlyLight = document.documentElement.classList.contains('light');
-            setTheme(isCurrentlyLight ? 'dark' : 'light');
+            setTheme(isCurrentlyLight ? 'dark' : 'light', true);
         });
+    }
+
+    // Dynamic OS/Browser color-scheme change sync (only if user hasn't explicitly set preference)
+    if (window.matchMedia) {
+        const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleThemeChange = (e) => {
+            if (!localStorage.getItem('portfolio-user-theme')) {
+                setTheme(e.matches ? 'dark' : 'light', false);
+            }
+        };
+        if (colorSchemeQuery.addEventListener) {
+            colorSchemeQuery.addEventListener('change', handleThemeChange);
+        } else if (colorSchemeQuery.addListener) {
+            colorSchemeQuery.addListener(handleThemeChange);
+        }
     }
 
     // 3. Project Filtering
