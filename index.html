@@ -11,7 +11,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS v4 Browser Build -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
@@ -26,6 +26,7 @@
             
             --font-sans: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --font-display: 'Oswald', sans-serif;
         }
 
         body {
@@ -73,35 +74,45 @@
     <main class="w-full max-w-6xl mx-auto px-6 flex-grow flex flex-col gap-32 pb-24">
         
         <!-- HERO SECTION -->
-        <section id="hero" class="pt-4 pb-8 md:pt-16 flex flex-col lg:flex-row items-center gap-16 slide-in">
-            <div class="flex-1 flex flex-col gap-6">
-                <div class="text-code-green font-mono tracking-tight text-sm md:text-base">Hello, I'm Adil Ali.</div>
-                <h1 class="text-5xl md:text-6xl font-bold leading-tight text-white">
-                    Building High-Performance <br/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-code-green to-teal-400">Applications &amp; Cloud-Native Systems.</span>
+        <section id="hero" class="pt-6 pb-12 md:pt-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 slide-in relative">
+            <!-- Subtle Ambient Glow -->
+            <div class="absolute -top-20 -right-20 w-[550px] h-[550px] bg-emerald-500/[0.08] rounded-full blur-3xl pointer-events-none -z-10"></div>
+            <div class="absolute top-10 left-1/3 w-[400px] h-[400px] bg-teal-500/[0.05] rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+            <div class="flex-1 flex flex-col gap-5">
+                <div class="flex items-center gap-2 text-sm md:text-base text-gray-300 font-mono tracking-normal">
+                    <span>Hello, I'm Adil Ali</span>
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#00FF66] shadow-[0_0_8px_#00FF66]"></span>
+                </div>
+                <h1 class="font-display text-6xl sm:text-7xl md:text-[5rem] lg:text-[5.4rem] font-medium leading-[0.96] tracking-tight">
+                    <span class="text-[#f4f3ef] block">Building High-</span>
+                    <span class="text-[#f4f3ef] block">Performance</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#86EFAC] via-[#5EEAD4] to-[#6EE7B7] block">Applications &amp;</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#86EFAC] via-[#5EEAD4] to-[#6EE7B7] block">Cloud-Native</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#86EFAC] via-[#5EEAD4] to-[#6EE7B7] block">Systems.</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
+                <p class="text-sm md:text-base text-gray-400 font-light leading-relaxed max-w-lg mt-1">
                     Specializing in clean architecture, isolated code execution, and distributed software solutions that scale efficiently.
                 </p>
-                <div class="mt-4 flex gap-4 font-mono text-sm">
-                    <a href="#projects" class="px-6 py-3 border border-code-green text-code-green rounded hover:bg-code-green/10 transition-colors">View Architecture</a>
-                    <a href="#contact" class="px-6 py-3 border border-slate-muted rounded hover:bg-slate-muted/20 transition-colors">Contact System</a>
-                </div>
             </div>
             
             <!-- Code Terminal Widget -->
-            <div class="flex-1 w-full max-w-lg glass-card overflow-hidden shadow-2xl shadow-code-green/5">
+            <div class="flex-1 w-full max-w-lg glass-card rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0c1219]/80 backdrop-blur-xl shadow-2xl shadow-emerald-950/20">
                 <!-- Terminal Header -->
-                <div class="flex items-center gap-2 px-4 py-3 border-b border-slate-muted/40 bg-[#06090F]">
-                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span class="ml-2 text-xs font-mono text-gray-500">guest@dev-env: ~</span>
+                <div class="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.05] bg-black/40">
+                    <div class="w-3 h-3 rounded-full bg-[#EF4444]"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#F59E0B]"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#10B981]"></div>
+                    <span class="ml-2 text-xs font-mono text-gray-400">guest@dev-env: ~</span>
                 </div>
                 <!-- Terminal Body -->
-                <div class="p-6 font-mono text-sm leading-relaxed text-gray-300 min-h-[200px]" id="terminal-widget">
-                    <span class="text-code-green">&gt;</span> cat profile.json<br/>
-                    <span id="typewriter-content" class="whitespace-pre-wrap"></span><span class="inline-block w-2 h-4 bg-gray-400 cursor-blink ml-1 align-middle"></span>
+                <div class="p-6 md:p-7 font-mono text-sm leading-relaxed text-gray-300 min-h-[300px]" id="terminal-widget">
+                    <div class="mb-3 text-sm">
+                        <span class="text-[#00FF66] font-semibold">&gt;</span> <span class="text-gray-300">cat profile.json</span>
+                    </div>
+                    <div class="relative">
+                        <span id="typewriter-content" class="whitespace-pre font-mono"></span><span id="typewriter-cursor" class="inline-block w-2 h-4 bg-gray-400 cursor-blink ml-0.5 align-middle"></span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -160,8 +171,8 @@
                                 <div class="flex flex-wrap gap-2">
                                     <span class="px-2 py-1 bg-white/5 rounded border border-white/10">React 19</span>
                                     <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Monaco Editor</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">FastAPI</span>
                                     <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Docker</span>
+                                    <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Microservices</span>
                                     <span class="px-2 py-1 bg-white/5 rounded border border-white/10">Asyncio</span>
                                 </div>
                             </div>

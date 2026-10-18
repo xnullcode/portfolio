@@ -1,29 +1,75 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Typewriter Effect
+    // 1. Typewriter Effect with Syntax Highlighting
     const typeWriterElement = document.getElementById('typewriter-content');
-    const typeWriterData = `{
-  "name": "Adil Ali",
-  "location": "India",
-  "stack": [
-    "React 19",
-    "Spring Boot",
-    "FastAPI",
-    "Go",
-    "Kubernetes"
-  ],
-  "status": "open_for_opportunities"
-}`;
-    
-    let i = 0;
-    function typeWriter() {
-        if (i < typeWriterData.length) {
-            typeWriterElement.textContent += typeWriterData.charAt(i);
-            i++;
-            setTimeout(typeWriter, 30);
+    const tokens = [
+        { text: '{\n  ', cls: 'text-gray-400' },
+        { text: '"name"', cls: 'text-sky-300' },
+        { text: ': ', cls: 'text-gray-400' },
+        { text: '"Adil Ali"', cls: 'text-amber-200' },
+        { text: ',\n  ', cls: 'text-gray-400' },
+        { text: '"location"', cls: 'text-sky-300' },
+        { text: ': ', cls: 'text-gray-400' },
+        { text: '"India"', cls: 'text-amber-200' },
+        { text: ',\n  ', cls: 'text-gray-400' },
+        { text: '"stack"', cls: 'text-sky-300' },
+        { text: ': [\n    ', cls: 'text-gray-400' },
+        { text: '"React 19"', cls: 'text-amber-200' },
+        { text: ',\n    ', cls: 'text-gray-400' },
+        { text: '"Spring Boot"', cls: 'text-amber-200' },
+        { text: ',\n    ', cls: 'text-gray-400' },
+        { text: '"Docker"', cls: 'text-amber-200' },
+        { text: ',\n    ', cls: 'text-gray-400' },
+        { text: '"Kubernetes"', cls: 'text-amber-200' },
+        { text: ',\n    ', cls: 'text-gray-400' },
+        { text: '"Go"', cls: 'text-amber-200' },
+        { text: ',\n    ', cls: 'text-gray-400' },
+        { text: '"Microservices"', cls: 'text-amber-200' },
+        { text: ',\n    ', cls: 'text-gray-400' },
+        { text: '"Distributed Architecture"', cls: 'text-amber-200' },
+        { text: '\n  ],\n  ', cls: 'text-gray-400' },
+        { text: '"status"', cls: 'text-sky-300' },
+        { text: ': ', cls: 'text-gray-400' },
+        { text: '"open_for_opportunities"', cls: 'text-emerald-300' },
+        { text: '\n}', cls: 'text-gray-400' }
+    ];
+
+    let tokenIdx = 0;
+    let charIdx = 0;
+
+    function escapeHtml(str) {
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
+    function renderTypewriter() {
+        if (!typeWriterElement) return;
+
+        let html = '';
+        for (let i = 0; i < tokenIdx; i++) {
+            html += `<span class="${tokens[i].cls}">${escapeHtml(tokens[i].text)}</span>`;
+        }
+
+        if (tokenIdx < tokens.length) {
+            const currentToken = tokens[tokenIdx];
+            const currentSlice = currentToken.text.slice(0, charIdx + 1);
+            html += `<span class="${currentToken.cls}">${escapeHtml(currentSlice)}</span>`;
+
+            charIdx++;
+            if (charIdx >= currentToken.text.length) {
+                tokenIdx++;
+                charIdx = 0;
+            }
+            typeWriterElement.innerHTML = html;
+            setTimeout(renderTypewriter, 20);
+        } else {
+            typeWriterElement.innerHTML = html;
         }
     }
-    setTimeout(typeWriter, 500);
+
+    setTimeout(renderTypewriter, 400);
 
     // 2. Project Filtering
     const filterButtons = document.querySelectorAll('.filter-btn');
