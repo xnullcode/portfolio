@@ -13,6 +13,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Three.js for 3D Background Waves -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <!-- Tailwind CSS v4 Browser Build -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     
@@ -63,6 +66,16 @@
                               linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
         }
 
+        .site-waves-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(16px);
@@ -74,51 +87,52 @@
         }
 
         html.light .glass-card {
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(15, 23, 42, 0.08);
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.40);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
         }
 
         html.light .card-header-bg {
-            background: rgba(0, 0, 0, 0.03) !important;
+            background: rgba(255, 255, 255, 0.25) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
         }
 
         .terminal-glass {
-            background: rgba(24, 18, 14, 0.55);
-            backdrop-filter: blur(30px) saturate(190%);
-            -webkit-backdrop-filter: blur(30px) saturate(190%);
+            background: rgba(18, 14, 10, 0.22);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
-                inset 0 0 16px 0 rgba(245, 158, 11, 0.06),
-                0 30px 60px -15px rgba(0, 0, 0, 0.75),
-                0 0 80px -10px rgba(245, 158, 11, 0.25);
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 35px -8px rgba(245, 158, 11, 0.15);
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         html.light .terminal-glass {
-            background: rgba(255, 255, 255, 0.62);
-            backdrop-filter: blur(32px) saturate(190%);
-            -webkit-backdrop-filter: blur(32px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.40);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             box-shadow: 
-                inset 0 1px 2px 0 rgba(255, 255, 255, 1),
-                inset 0 0 20px 0 rgba(255, 255, 255, 0.5),
-                0 25px 60px -15px rgba(245, 158, 11, 0.18),
-                0 15px 35px -5px rgba(0, 0, 0, 0.06);
+                inset 0 1px 2px 0 rgba(255, 255, 255, 0.9),
+                0 20px 40px -10px rgba(0, 0, 0, 0.05),
+                0 0 25px -5px rgba(245, 158, 11, 0.12);
         }
 
         .terminal-header {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         html.light .terminal-header {
-            background: rgba(255, 255, 255, 0.5);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.30);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .terminal-header-title {
@@ -246,6 +260,9 @@
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body class="min-h-screen flex flex-col items-center bg-grid selection:bg-amber-500 selection:text-black">
+    <!-- 3D Undulating Wireframe Wave Canvas (Full Website Background) -->
+    <canvas id="hero-waves-canvas" class="site-waves-canvas"></canvas>
+
     <!-- Navbar with Light/Dark Mode Switch -->
     <nav class="w-full max-w-6xl mx-auto px-6 py-6 flex justify-end items-center z-50 relative">
         <div class="flex items-center gap-6 text-sm font-mono">
@@ -258,7 +275,7 @@
         </div>
     </nav>
 
-    <main class="w-full max-w-6xl mx-auto px-6 flex-grow flex flex-col gap-32 pb-24">
+    <main class="w-full max-w-6xl mx-auto px-6 flex-grow flex flex-col gap-32 pb-24 relative z-10">
         
         <!-- HERO SECTION -->
         <section id="hero" class="pt-6 pb-12 md:pt-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 slide-in relative">
@@ -289,8 +306,8 @@
             <!-- Code Terminal Widget with Authentic Frosted Glass UI -->
             <div class="flex-1 w-full max-w-lg relative">
                 <!-- Atmospheric Amber Under-Glow -->
-                <div class="absolute -top-12 -left-10 -right-10 -bottom-10 bg-[radial-gradient(ellipse_at_50%_50%,rgba(245,158,11,0.28)_0%,rgba(249,115,22,0.18)_45%,transparent_75%)] blur-3xl pointer-events-none"></div>
-                <div class="absolute -top-16 -right-12 w-80 h-80 bg-amber-500/25 rounded-full blur-[90px] pointer-events-none"></div>
+                <div class="absolute -top-10 -left-8 -right-8 -bottom-8 bg-[radial-gradient(ellipse_at_50%_50%,rgba(245,158,11,0.12)_0%,rgba(249,115,22,0.06)_45%,transparent_75%)] blur-2xl pointer-events-none"></div>
+                <div class="absolute -top-12 -right-10 w-72 h-72 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none"></div>
 
                 <!-- Frosted Glass Terminal Window -->
                 <div class="relative rounded-[22px] overflow-hidden terminal-glass">
@@ -557,7 +574,7 @@
     </main>
 
     <!-- FOOTER / CONTACT LINK TREE -->
-    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-12 pb-6 slide-in transition-colors duration-300">
+    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-12 pb-6 slide-in transition-colors duration-300 relative z-10">
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
             
             <div class="flex flex-col gap-2 text-center md:text-left">
@@ -595,6 +612,7 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    <script src="wave-background.js"></script>
     <script>
         feather.replace();
     </script>
