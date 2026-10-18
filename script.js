@@ -71,21 +71,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(renderTypewriter, 400);
 
-    // 2. Light / Dark Theme Switcher
+    // 2. Light / Dark Theme Switcher (Default: light)
     const themeToggleBtn = document.getElementById('theme-toggle');
     const urlParams = new URLSearchParams(window.location.search);
-    const savedTheme = urlParams.get('theme') || localStorage.getItem('portfolio-theme') || 'dark';
+    const savedTheme = urlParams.get('theme') || localStorage.getItem('portfolio-theme-v2') || 'light';
 
     function setTheme(theme) {
-        if (theme === 'light') {
-            document.documentElement.classList.add('light');
-            document.documentElement.classList.remove('dark');
-            if (themeToggleBtn) themeToggleBtn.textContent = 'Dark';
-        } else {
+        if (theme === 'dark') {
             document.documentElement.classList.remove('light');
             document.documentElement.classList.add('dark');
             if (themeToggleBtn) themeToggleBtn.textContent = 'Light';
+        } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+            if (themeToggleBtn) themeToggleBtn.textContent = 'Dark';
         }
+        localStorage.setItem('portfolio-theme-v2', theme);
         localStorage.setItem('portfolio-theme', theme);
     }
 

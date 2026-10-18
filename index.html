@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -101,6 +101,25 @@
 
         html.light .hero-subtext-scrim {
             background: radial-gradient(ellipse 70% 65% at 45% 50%, rgba(248, 250, 252, 0.90) 0%, rgba(248, 250, 252, 0.55) 45%, transparent 75%);
+        }
+
+        /* Ambient Glow all around the top hero section: seamless radial falloff without harsh edges */
+        .hero-ambient-glow {
+            position: absolute;
+            inset: -5rem -10% -4rem -10%;
+            background: 
+                radial-gradient(circle 420px at 75% 42%, rgba(249, 115, 22, 0.14) 0%, rgba(245, 158, 11, 0.06) 50%, transparent 75%),
+                radial-gradient(circle 380px at 25% 40%, rgba(245, 158, 11, 0.12) 0%, rgba(234, 88, 12, 0.05) 50%, transparent 75%),
+                radial-gradient(ellipse 90% 75% at 50% 45%, rgba(245, 158, 11, 0.09) 0%, rgba(249, 115, 22, 0.035) 45%, transparent 75%);
+            pointer-events: none;
+            z-index: -10;
+        }
+
+        html.light .hero-ambient-glow {
+            background: 
+                radial-gradient(circle 420px at 75% 42%, rgba(251, 146, 60, 0.18) 0%, rgba(245, 158, 11, 0.08) 50%, transparent 75%),
+                radial-gradient(circle 380px at 25% 40%, rgba(251, 191, 36, 0.15) 0%, rgba(249, 115, 22, 0.06) 50%, transparent 75%),
+                radial-gradient(ellipse 90% 75% at 50% 45%, rgba(254, 215, 170, 0.24) 0%, rgba(253, 186, 116, 0.08) 45%, transparent 75%);
         }
 
         /* 3D Glass Floating Rounded Rectangle Header */
@@ -452,19 +471,18 @@
                 <a href="#metrics" class="nav-link hover:text-amber-400 transition-colors">Metrics</a>
                 <a href="#contact" class="nav-link hover:text-amber-400 transition-colors">Contact</a>
                 <button id="theme-toggle" class="cursor-pointer text-[11px] sm:text-xs font-satoshi font-semibold uppercase tracking-wider px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border border-current opacity-75 hover:opacity-100 hover:text-amber-400 transition-all ml-0.5 sm:ml-1" aria-label="Toggle theme">
-                    Light
+                    Dark
                 </button>
             </div>
         </nav>
     </header>
 
-    <main class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 flex-grow flex flex-col gap-16 sm:gap-24 md:gap-32 pb-20 sm:pb-24 relative z-10 overflow-x-clip">
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 flex-grow flex flex-col gap-16 sm:gap-24 md:gap-32 pb-20 sm:pb-24 relative z-10">
         
         <!-- HERO SECTION -->
-        <section id="hero" class="pt-4 pb-10 sm:pt-6 sm:pb-12 md:pt-10 md:pb-16 flex flex-col lg:flex-row items-center gap-10 lg:gap-16 slide-in relative overflow-x-clip">
-            <!-- Ambient Amber Glow -->
-            <div class="absolute -top-20 -right-20 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-amber-500/[0.08] rounded-full blur-3xl pointer-events-none -z-10"></div>
-            <div class="absolute top-10 left-1/4 sm:left-1/3 w-[260px] sm:w-[400px] h-[260px] sm:h-[400px] bg-orange-500/[0.05] rounded-full blur-3xl pointer-events-none -z-10"></div>
+        <section id="hero" class="pt-4 pb-10 sm:pt-6 sm:pb-12 md:pt-10 md:pb-16 flex flex-col lg:flex-row items-center gap-10 lg:gap-16 slide-in relative">
+            <!-- Ambient Atmospheric Hero Glow (All around the top hero) -->
+            <div class="hero-ambient-glow pointer-events-none -z-10" aria-hidden="true"></div>
 
             <div class="flex-1 flex flex-col gap-4 sm:gap-5 w-full">
                 <div id="hero-greeting" class="flex items-center gap-2 text-xs sm:text-sm md:text-base font-satoshi font-medium tracking-normal theme-subtext">
@@ -492,9 +510,8 @@
             
             <!-- Code Terminal Widget with Authentic Frosted Glass UI -->
             <div class="flex-1 w-full max-w-lg relative">
-                <!-- Atmospheric Amber Under-Glow -->
-                <div class="absolute -top-10 -left-8 -right-8 -bottom-8 bg-[radial-gradient(ellipse_at_50%_50%,rgba(245,158,11,0.12)_0%,rgba(249,115,22,0.06)_45%,transparent_75%)] blur-2xl pointer-events-none"></div>
-                <div class="absolute -top-12 -right-10 w-72 h-72 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+                <!-- Atmospheric Amber Under-Glow: seamlessly fading without edge clipping -->
+                <div class="absolute -inset-4 sm:-inset-6 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.12)_0%,rgba(249,115,22,0.04)_50%,transparent_72%)] pointer-events-none -z-10"></div>
 
                 <!-- Frosted Glass Terminal Window -->
                 <div class="relative rounded-[22px] overflow-hidden terminal-glass">
@@ -833,7 +850,7 @@
     </main>
 
     <!-- EXPANDED HIGH-IMPACT FOOTER & CONTACT SYSTEM -->
-    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-12 md:pt-24 pb-12 slide-in transition-colors duration-300 relative z-10 overflow-x-clip">
+    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-12 md:pt-24 pb-12 slide-in transition-colors duration-300 relative z-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col gap-10 md:gap-14">
             
             <!-- Top Footer Banner: Big Cursive Brand, Availability, and Get in Touch CTA -->
