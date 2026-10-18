@@ -143,13 +143,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. Project Filtering
+    // 3. Project Filtering (Instantaneous zero-delay switch)
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active state on buttons
+            const filterValue = btn.getAttribute('data-filter');
+            if (btn.classList.contains('active')) return;
+
+            // Update active state on buttons immediately
             filterButtons.forEach(b => {
                 b.classList.remove('active', 'bg-amber-500/10', 'text-amber-400', 'border-amber-500');
                 b.classList.add('border-slate-700/60');
@@ -157,22 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.remove('border-slate-700/60');
             btn.classList.add('active', 'bg-amber-500/10', 'text-amber-400', 'border-amber-500');
 
-            const filterValue = btn.getAttribute('data-filter');
-
+            // Switch card visibility instantaneously in the exact same render frame
             projectCards.forEach(card => {
-                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                    card.style.display = 'flex';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
+                const matches = (filterValue === 'all' || card.getAttribute('data-category') === filterValue);
+                card.style.display = matches ? 'flex' : 'none';
+                card.style.opacity = '1';
+                card.style.transform = 'none';
             });
         });
     });
