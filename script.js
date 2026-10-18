@@ -111,21 +111,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize theme state (button label & document class)
     setTheme(getInitialTheme(), false);
 
-    // User manual toggle (saves explicit preference)
+    // User manual toggle
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
             const isCurrentlyLight = document.documentElement.classList.contains('light');
-            setTheme(isCurrentlyLight ? 'dark' : 'light', true);
+            const newTheme = isCurrentlyLight ? 'dark' : 'light';
+            const systemTheme = getSystemTheme();
+
+            if (newTheme === systemTheme) {
+                // If toggled back to match current browser/OS setting, release manual lock
+                localStorage.removeItem('portfolio-user-theme');
+                setTheme(newTheme, false);
+            } else {
+                setTheme(newTheme, true);
+            }
         });
     }
 
-    // Dynamic OS/Browser color-scheme change sync (only if user hasn't explicitly set preference)
+    // Dynamic OS/Browser color-scheme change sync
     if (window.matchMedia) {
         const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
         const handleThemeChange = (e) => {
-            if (!localStorage.getItem('portfolio-user-theme')) {
-                setTheme(e.matches ? 'dark' : 'light', false);
-            }
+            // When browser/system theme changes, always follow it and release any manual lock
+            localStorage.removeItem('portfolio-user-theme');
+            setTheme(e.matches ? 'dark' : 'light', false);
         };
         if (colorSchemeQuery.addEventListener) {
             colorSchemeQuery.addEventListener('change', handleThemeChange);
