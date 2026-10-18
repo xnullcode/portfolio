@@ -163,24 +163,17 @@
         });
         themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
-        // 6. Smooth Mouse and Scroll Parallax
+        // 6. Smooth Mouse Parallax
         let targetMouseX = 0;
         let targetMouseY = 0;
         let currentMouseX = 0;
         let currentMouseY = 0;
-        let scrollY = window.scrollY;
-        let currentScrollY = scrollY;
 
         function onMouseMove(e) {
             targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
             targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
         }
         window.addEventListener('mousemove', onMouseMove, { passive: true });
-
-        function onScroll() {
-            scrollY = window.scrollY;
-        }
-        window.addEventListener('scroll', onScroll, { passive: true });
 
         // 7. Full-Site Animation Loop
         const clock = new THREE.Clock();
@@ -197,15 +190,14 @@
 
             const time = clock.getElapsedTime();
 
-            // Smooth mouse and scroll interpolation
+            // Smooth mouse interpolation
             currentMouseX += (targetMouseX - currentMouseX) * 0.04;
             currentMouseY += (targetMouseY - currentMouseY) * 0.04;
-            currentScrollY += (scrollY - currentScrollY) * 0.05;
 
-            // Camera reacts gently to mouse and page scroll
+            // Camera reacts gently to mouse while remaining steadily anchored during scroll
             camera.position.x = currentMouseX * 2.2;
-            camera.position.y = -16 + currentMouseY * 1.3 - (currentScrollY * 0.002);
-            camera.lookAt(0, -(currentScrollY * 0.0015), 0);
+            camera.position.y = -16 + currentMouseY * 1.3;
+            camera.lookAt(0, 0, 0);
 
             // Layered harmonic waves across full background
             const positions = geometry.attributes.position.array;

@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Adil Ali</title>
     
     <!-- Minimalistic Terminal SVG Favicon -->
@@ -45,6 +45,13 @@
             --font-satoshi: 'Satoshi', sans-serif;
         }
 
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+            width: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             background-color: #0A0E17;
             color: #d1d5db;
@@ -77,8 +84,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 0;
         }
@@ -428,45 +435,45 @@
     <canvas id="hero-waves-canvas" class="site-waves-canvas"></canvas>
 
     <!-- 3D Glass Floating Rounded Rectangle Header -->
-    <header class="fixed top-4 left-0 right-0 w-full z-50 flex justify-center px-4 sm:px-6 pointer-events-none">
-        <nav class="header-floating-glass pointer-events-auto w-full max-w-5xl px-5 sm:px-7 py-2.5 sm:py-3 flex items-center justify-between">
+    <header class="fixed top-3 sm:top-4 left-0 right-0 w-full z-50 flex justify-center px-3 sm:px-6 pointer-events-none">
+        <nav class="header-floating-glass pointer-events-auto w-full max-w-5xl px-3.5 sm:px-7 py-2 sm:py-3 flex items-center justify-between">
             <!-- Left: Adil in Stylish Cursive Script Typography (No Orange Dot) -->
             <div class="flex items-center">
-                <a href="#hero" class="header-cursive-brand active text-2xl sm:text-3xl transition-colors duration-200 select-none" aria-label="Adil - Scroll to top">
+                <a href="#hero" class="header-cursive-brand active text-xl sm:text-3xl transition-colors duration-200 select-none" aria-label="Adil - Scroll to top">
                     Adil
                 </a>
             </div>
 
             <!-- Right: Current Navigation & Theme Toggle -->
-            <div class="flex items-center gap-5 sm:gap-7 text-sm font-satoshi font-medium">
+            <div class="flex items-center gap-3 sm:gap-7 text-xs sm:text-sm font-satoshi font-medium">
                 <a href="#projects" class="nav-link hover:text-amber-400 transition-colors">Projects</a>
                 <a href="#metrics" class="nav-link hover:text-amber-400 transition-colors">Metrics</a>
                 <a href="#contact" class="nav-link hover:text-amber-400 transition-colors">Contact</a>
-                <button id="theme-toggle" class="cursor-pointer text-xs font-satoshi font-semibold uppercase tracking-wider px-2.5 py-1 rounded border border-current opacity-75 hover:opacity-100 hover:text-amber-400 transition-all ml-1" aria-label="Toggle theme">
+                <button id="theme-toggle" class="cursor-pointer text-[11px] sm:text-xs font-satoshi font-semibold uppercase tracking-wider px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border border-current opacity-75 hover:opacity-100 hover:text-amber-400 transition-all ml-0.5 sm:ml-1" aria-label="Toggle theme">
                     Light
                 </button>
             </div>
         </nav>
     </header>
 
-    <main class="w-full max-w-6xl mx-auto px-6 pt-24 md:pt-28 flex-grow flex flex-col gap-24 md:gap-32 pb-24 relative z-10">
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 flex-grow flex flex-col gap-16 sm:gap-24 md:gap-32 pb-20 sm:pb-24 relative z-10 overflow-x-clip">
         
         <!-- HERO SECTION -->
-        <section id="hero" class="pt-6 pb-12 md:pt-10 md:pb-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 slide-in relative">
+        <section id="hero" class="pt-4 pb-10 sm:pt-6 sm:pb-12 md:pt-10 md:pb-16 flex flex-col lg:flex-row items-center gap-10 lg:gap-16 slide-in relative overflow-x-clip">
             <!-- Ambient Amber Glow -->
-            <div class="absolute -top-20 -right-20 w-[550px] h-[550px] bg-amber-500/[0.08] rounded-full blur-3xl pointer-events-none -z-10"></div>
-            <div class="absolute top-10 left-1/3 w-[400px] h-[400px] bg-orange-500/[0.05] rounded-full blur-3xl pointer-events-none -z-10"></div>
+            <div class="absolute -top-20 -right-20 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-amber-500/[0.08] rounded-full blur-3xl pointer-events-none -z-10"></div>
+            <div class="absolute top-10 left-1/4 sm:left-1/3 w-[260px] sm:w-[400px] h-[260px] sm:h-[400px] bg-orange-500/[0.05] rounded-full blur-3xl pointer-events-none -z-10"></div>
 
-            <div class="flex-1 flex flex-col gap-5">
-                <div id="hero-greeting" class="flex items-center gap-2 text-sm md:text-base font-satoshi font-medium tracking-normal theme-subtext">
+            <div class="flex-1 flex flex-col gap-4 sm:gap-5 w-full">
+                <div id="hero-greeting" class="flex items-center gap-2 text-xs sm:text-sm md:text-base font-satoshi font-medium tracking-normal theme-subtext">
                     <span>Hello, I'm Adil Ali</span>
                     <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#F59E0B] shadow-[0_0_8px_#F59E0B]"></span>
                 </div>
 
-                <h1 class="font-display text-5xl sm:text-6xl md:text-[5rem] lg:text-[5.5rem] font-bold leading-[1.06] tracking-[-0.02em] theme-heading overflow-visible">
+                <h1 class="font-display text-4xl sm:text-6xl md:text-[5rem] lg:text-[5.5rem] font-bold leading-[1.06] tracking-[-0.02em] theme-heading overflow-visible">
                     <span class="block text-inherit">Building High-</span>
                     <span class="block text-inherit">Performance</span>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] via-[#F97316] to-[#EA580C] block pt-1 pb-6 overflow-visible">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] via-[#F97316] to-[#EA580C] block pt-1 pb-4 sm:pb-6 overflow-visible">
                         <span class="block mb-1 sm:mb-1.5">Applications &amp;</span>
                         <span class="block">Cloud-Native</span>
                         <span class="block pb-2">Systems.</span>
@@ -475,7 +482,7 @@
                 <div class="relative max-w-lg mt-1">
                     <!-- Top-Left (VAR 01 // Gradient Scrim): Soft dark radial shadow behind text that gently dims the wave -->
                     <div class="hero-subtext-scrim absolute -inset-x-4 -inset-y-2 rounded-xl pointer-events-none -z-10" aria-hidden="true"></div>
-                    <p class="text-sm md:text-base theme-subtext font-light leading-relaxed relative z-10">
+                    <p class="text-xs sm:text-sm md:text-base theme-subtext font-light leading-relaxed relative z-10">
                         Specializing in clean architecture, isolated code execution, and distributed software solutions that scale efficiently.
                     </p>
                 </div>
@@ -490,19 +497,19 @@
                 <!-- Frosted Glass Terminal Window -->
                 <div class="relative rounded-[22px] overflow-hidden terminal-glass">
                     <!-- Glass Header Bar -->
-                    <div class="flex items-center gap-2 px-5 py-3.5 terminal-header">
+                    <div class="flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-3.5 terminal-header">
                         <div class="w-3 h-3 rounded-full bg-[#EF4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]"></div>
                         <div class="w-3 h-3 rounded-full bg-[#F59E0B] shadow-[0_0_6px_rgba(245,158,11,0.5)]"></div>
                         <div class="w-3 h-3 rounded-full bg-[#10B981] shadow-[0_0_6px_rgba(16,185,129,0.5)]"></div>
                         <span class="ml-2 text-xs font-mono terminal-header-title">guest@dev-env: ~</span>
                     </div>
                     <!-- Glass Body -->
-                    <div class="p-6 md:p-7 font-mono text-sm leading-relaxed text-gray-200 min-h-[300px]" id="terminal-widget">
-                        <div class="mb-3 text-sm">
+                    <div class="p-4 sm:p-6 md:p-7 font-mono text-xs sm:text-sm leading-relaxed text-gray-200 min-h-[260px] sm:min-h-[300px] overflow-x-auto" id="terminal-widget">
+                        <div class="mb-3 text-xs sm:text-sm">
                             <span class="terminal-prompt-arrow text-amber-400 font-semibold">&gt;</span> <span class="terminal-prompt-cmd text-gray-200">cat profile.json</span>
                         </div>
                         <div class="relative">
-                            <span id="typewriter-content" class="whitespace-pre font-mono"></span><span id="typewriter-cursor" class="inline-block w-2 h-4 bg-amber-400 cursor-blink ml-0.5 align-middle"></span>
+                            <span id="typewriter-content" class="whitespace-pre font-mono text-xs sm:text-sm"></span><span id="typewriter-cursor" class="inline-block w-2 h-4 bg-amber-400 cursor-blink ml-0.5 align-middle"></span>
                         </div>
                     </div>
                 </div>
@@ -511,16 +518,16 @@
  
         <!-- INTERLUDE QUOTE 01 (Between Hero & Architectural Showcase) -->
         <div class="w-full flex justify-center slide-in my-2">
-            <div class="quote-glass-card max-w-2xl w-full p-6 sm:p-7 relative overflow-hidden group">
+            <div class="quote-glass-card max-w-2xl w-full p-4 sm:p-7 relative overflow-hidden group">
                 <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
-                <div class="flex items-start gap-4 sm:gap-5">
-                    <span class="text-amber-400 font-serif text-4xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
-                    <div class="flex flex-col gap-2.5">
+                <div class="flex items-start gap-3 sm:gap-5">
+                    <span class="text-amber-400 font-serif text-3xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
+                    <div class="flex flex-col gap-2.5 min-w-0">
                         <blockquote class="text-sm sm:text-base font-satoshi font-medium leading-relaxed theme-heading italic">
                             Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
                         </blockquote>
-                        <div class="flex items-center gap-2 text-xs font-mono theme-subtext">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono theme-subtext">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
                             <span class="text-amber-400 font-semibold">Martin Fowler</span>
                             <span class="opacity-40">//</span>
                             <span>Refactoring &amp; Software Craftsmanship</span>
@@ -702,16 +709,16 @@
 
             <!-- INTERLUDE QUOTE 02 (Between Architectural Showcase & Tech Capabilities) -->
             <div class="w-full flex justify-center my-2">
-                <div class="quote-glass-card max-w-2xl w-full p-6 sm:p-7 relative overflow-hidden group">
+                <div class="quote-glass-card max-w-2xl w-full p-4 sm:p-7 relative overflow-hidden group">
                     <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
-                    <div class="flex items-start gap-4 sm:gap-5">
-                        <span class="text-amber-400 font-serif text-4xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
-                        <div class="flex flex-col gap-2.5">
+                    <div class="flex items-start gap-3 sm:gap-5">
+                        <span class="text-amber-400 font-serif text-3xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
+                        <div class="flex flex-col gap-2.5 min-w-0">
                             <blockquote class="text-sm sm:text-base font-satoshi font-medium leading-relaxed theme-heading italic">
                                 There are two ways of constructing software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies.
                             </blockquote>
-                            <div class="flex items-center gap-2 text-xs font-mono theme-subtext">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                            <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono theme-subtext">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
                                 <span class="text-amber-400 font-semibold">Sir C.A.R. Hoare</span>
                                 <span class="opacity-40">//</span>
                                 <span>Turing Award Laureate &amp; Creator of CSP</span>
@@ -796,16 +803,16 @@
 
             <!-- INTERLUDE QUOTE 03 (Between Tech Capabilities & Contact/Footer) -->
             <div class="w-full flex justify-center my-2">
-                <div class="quote-glass-card max-w-2xl w-full p-6 sm:p-7 relative overflow-hidden group">
+                <div class="quote-glass-card max-w-2xl w-full p-4 sm:p-7 relative overflow-hidden group">
                     <div class="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
-                    <div class="flex items-start gap-4 sm:gap-5">
-                        <span class="text-amber-400 font-serif text-4xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
-                        <div class="flex flex-col gap-2.5">
+                    <div class="flex items-start gap-3 sm:gap-5">
+                        <span class="text-amber-400 font-serif text-3xl sm:text-5xl leading-none select-none opacity-80 mt-0.5">“</span>
+                        <div class="flex flex-col gap-2.5 min-w-0">
                             <blockquote class="text-sm sm:text-base font-satoshi font-medium leading-relaxed theme-heading italic">
                                 A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable.
                             </blockquote>
-                            <div class="flex items-center gap-2 text-xs font-mono theme-subtext">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                            <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono theme-subtext">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
                                 <span class="text-amber-400 font-semibold">Leslie Lamport</span>
                                 <span class="opacity-40">//</span>
                                 <span>Turing Award Laureate &amp; Distributed Systems Pioneer</span>
@@ -820,8 +827,8 @@
     </main>
 
     <!-- EXPANDED HIGH-IMPACT FOOTER & CONTACT SYSTEM -->
-    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-16 md:pt-24 pb-12 slide-in transition-colors duration-300 relative z-10">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col gap-14">
+    <footer id="contact" class="w-full border-t border-slate-700/30 bg-[#06090F] theme-footer pt-12 md:pt-24 pb-12 slide-in transition-colors duration-300 relative z-10 overflow-x-clip">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col gap-10 md:gap-14">
             
             <!-- Top Footer Banner: Big Cursive Brand, Availability, and Get in Touch CTA -->
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 pb-10 border-b border-slate-700/30">
