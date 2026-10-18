@@ -93,15 +93,19 @@
                 inset 0 0 16px 0 rgba(245, 158, 11, 0.06),
                 0 30px 60px -15px rgba(0, 0, 0, 0.75),
                 0 0 80px -10px rgba(245, 158, 11, 0.25);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         html.light .terminal-glass {
-            background: rgba(15, 23, 42, 0.94);
-            border: 1px solid rgba(15, 23, 42, 0.15);
+            background: rgba(255, 255, 255, 0.62);
+            backdrop-filter: blur(32px) saturate(190%);
+            -webkit-backdrop-filter: blur(32px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.85);
             box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
-                0 25px 50px -12px rgba(15, 23, 42, 0.25),
-                0 0 60px -15px rgba(245, 158, 11, 0.25);
+                inset 0 1px 2px 0 rgba(255, 255, 255, 1),
+                inset 0 0 20px 0 rgba(255, 255, 255, 0.5),
+                0 25px 60px -15px rgba(245, 158, 11, 0.18),
+                0 15px 35px -5px rgba(0, 0, 0, 0.06);
         }
 
         .terminal-header {
@@ -109,6 +113,65 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        html.light .terminal-header {
+            background: rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .terminal-header-title {
+            color: rgba(209, 213, 219, 0.8);
+            transition: color 0.3s ease;
+        }
+
+        html.light .terminal-header-title {
+            color: #64748b !important;
+        }
+
+        #terminal-widget {
+            transition: color 0.3s ease;
+        }
+
+        html.light #terminal-widget {
+            color: #1e293b !important;
+        }
+
+        .terminal-prompt-arrow {
+            transition: color 0.3s ease;
+        }
+
+        html.light .terminal-prompt-arrow {
+            color: #d97706 !important;
+        }
+
+        .terminal-prompt-cmd {
+            transition: color 0.3s ease;
+        }
+
+        html.light .terminal-prompt-cmd {
+            color: #1e293b !important;
+        }
+
+        html.light .token-punct {
+            color: #64748b !important;
+        }
+
+        html.light .token-key {
+            color: #0284c7 !important;
+        }
+
+        html.light .token-str {
+            color: #b45309 !important;
+        }
+
+        html.light .token-status {
+            color: #ea580c !important;
+        }
+
+        html.light #typewriter-cursor {
+            background-color: #d97706 !important;
         }
 
         .theme-heading {
@@ -218,12 +281,12 @@
                         <div class="w-3 h-3 rounded-full bg-[#EF4444] shadow-[0_0_6px_rgba(239,68,68,0.5)]"></div>
                         <div class="w-3 h-3 rounded-full bg-[#F59E0B] shadow-[0_0_6px_rgba(245,158,11,0.5)]"></div>
                         <div class="w-3 h-3 rounded-full bg-[#10B981] shadow-[0_0_6px_rgba(16,185,129,0.5)]"></div>
-                        <span class="ml-2 text-xs font-mono text-gray-300/80">guest@dev-env: ~</span>
+                        <span class="ml-2 text-xs font-mono terminal-header-title">guest@dev-env: ~</span>
                     </div>
                     <!-- Glass Body -->
                     <div class="p-6 md:p-7 font-mono text-sm leading-relaxed text-gray-200 min-h-[300px]" id="terminal-widget">
                         <div class="mb-3 text-sm">
-                            <span class="text-amber-400 font-semibold">&gt;</span> <span class="text-gray-200">cat profile.json</span>
+                            <span class="terminal-prompt-arrow text-amber-400 font-semibold">&gt;</span> <span class="terminal-prompt-cmd text-gray-200">cat profile.json</span>
                         </div>
                         <div class="relative">
                             <span id="typewriter-content" class="whitespace-pre font-mono"></span><span id="typewriter-cursor" class="inline-block w-2 h-4 bg-amber-400 cursor-blink ml-0.5 align-middle"></span>
