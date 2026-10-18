@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Light / Dark Theme Switcher
     const themeToggleBtn = document.getElementById('theme-toggle');
-    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+    const urlParams = new URLSearchParams(window.location.search);
+    const savedTheme = urlParams.get('theme') || localStorage.getItem('portfolio-theme') || 'dark';
 
     function setTheme(theme) {
         if (theme === 'light') {
